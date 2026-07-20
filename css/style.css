@@ -398,12 +398,12 @@ button { font-family: inherit; cursor: pointer; }
     position: static;
     padding-top: calc(var(--header-h) + 1vh);
   }
-  .hero__copy { margin-top: 6vh; padding-bottom: 0; }
+  .hero__copy { margin-top: 18px; padding-bottom: 0; }
   .hero__item--wide  { width: 84vw; margin-top: 0; }
-  .hero__item--tall  { width: 54vw; margin-top: 1vh; }
-  .hero__item--small { width: 46vw; margin-top: 3vh; }
-  .hero__item:nth-child(even) { margin-top: 7vh; }
-  .hero__item--small:nth-child(even) { margin-top: 11vh; }
+  .hero__item--tall  { width: 52vw; margin-top: 1vh; }
+  .hero__item--small { width: 46vw; margin-top: 2vh; }
+  .hero__item:nth-child(even) { margin-top: 4vh; }
+  .hero__item--small:nth-child(even) { margin-top: 7vh; }
   .hero__actions .btn { min-width: 0; flex: 1 1 auto; padding: 0.95em 1.1em; font-size: 12px; }
   .hero__scroll { display: none; }
 }
@@ -413,11 +413,11 @@ button { font-family: inherit; cursor: pointer; }
 ============================================================ */
 .scene__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(28px, 4vw, 56px) clamp(18px, 3vw, 40px);
 }
 @media (max-width: 767px) {
-  .scene__grid { grid-template-columns: repeat(2, 1fr); }
+  .scene__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .scene-card { text-align: center; position: relative; }
@@ -469,7 +469,8 @@ button { font-family: inherit; cursor: pointer; }
 
 .scene-card__circle {
   display: block;
-  width: min(100%, 210px);
+  width: 100%;
+  max-width: 210px;
   aspect-ratio: 1;
   margin: 0 auto;
   border-radius: 50%;
@@ -895,7 +896,8 @@ button { font-family: inherit; cursor: pointer; }
 
 .voice__arrow {
   position: absolute;
-  top: 38%;
+  top: 154px;   /* 写真（円形部分）の縦中央 */
+  transform: translateY(-50%);
   z-index: 10;
   width: 46px;
   height: 46px;
@@ -915,6 +917,9 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 767px) {
   .voice__arrow--prev { left: 2px; }
   .voice__arrow--next { right: 2px; }
+  /* スマホは1件ずつ中央にぴったり表示（次のカードは見切れさせない） */
+  .voice__list { gap: 32px; }
+  .voice-card { flex: 0 0 100%; }
 }
 
 /* ============================================================
