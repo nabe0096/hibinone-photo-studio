@@ -17,7 +17,7 @@ const SITE_CONFIG = {
   area: "Miyazaki / Miyakonojo",
 
   /* Instagram（URLが決まったら書き換える） */
-  instagramUrl: "https://www.instagram.com/",
+  instagramUrl: "https://www.instagram.com/hibi_none/?hl=ja",
 
   /* ----------------------------------------------------------
      お問い合わせフォーム送信設定
