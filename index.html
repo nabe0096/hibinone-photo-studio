@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ヒビノネ写真館｜宮崎県・都城市の出張撮影 — 何気ない今日を、未来の宝物に。</title>
+<meta name="description" content="宮崎県・都城市を中心に活動する出張撮影の写真館。家族写真、七五三、成人式、ブライダル、ニューボーンフォト、商品・店舗撮影まで。何気ない日常の空気ごと、未来の宝物として残します。">
+<meta property="og:title" content="ヒビノネ写真館｜宮崎県・都城市の出張撮影">
+<meta property="og:description" content="何気ない今日を、未来の宝物に。家族の笑い声や日常の空気まで思い出せる写真を、一枚一枚心を込めて撮影します。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/ogp.jpg">
+<meta property="og:site_name" content="ヒビノネ写真館">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "ヒビノネ写真館",
+  "alternateName": "HIBINONE PHOTO STUDIO",
+  "description": "宮崎県・都城市を中心に活動する出張撮影の写真館。家族写真、七五三、成人式、ブライダル、商品・店舗撮影に対応。",
+  "areaServed": ["宮崎県", "都城市"],
+  "address": { "@type": "PostalAddress", "addressRegion": "宮崎県", "addressLocality": "都城市" },
+  "founder": { "@type": "Person", "name": "Keiko", "jobTitle": "Photographer" },
+  "image": "images/ogp.jpg",
+  "priceRange": "¥13,000〜¥45,000",
+  "knowsAbout": ["家族写真", "七五三", "成人式", "ブライダルフォト", "ニューボーンフォト", "商品撮影", "店舗撮影", "プロフィール撮影"]
+}
+</script>
+</head>
+<body>
+
+<!-- ============================ Header ============================ -->
+<header class="header" id="header">
+  <div class="header__inner">
+    <a class="header__brand" href="#top" data-scroll>
+      <img class="header__logo" src="images/logo.webp" alt="ヒビノネ写真館 ロゴ" width="88" height="88">
+      <span class="header__brand-en">HIBINONE PHOTO STUDIO</span>
+    </a>
+    <nav class="header__nav" id="global-nav" aria-label="メインメニュー">
+      <ul class="header__menu">
+        <li><a href="#about"   data-scroll>ABOUT</a></li>
+        <li><a href="#scene"   data-scroll>SCENE</a></li>
+        <li><a href="#gallery" data-scroll>GALLERY</a></li>
+        <li><a href="#price"   data-scroll>PRICE</a></li>
+        <li><a href="#voice"   data-scroll>VOICE</a></li>
+        <li><a href="#faq"     data-scroll>FAQ</a></li>
+        <li><a href="#contact" data-scroll class="header__contact-link">CONTACT</a></li>
+      </ul>
+    </nav>
+    <button class="header__burger" id="burger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============================ First View ============================ -->
+<section class="hero" id="gallery" aria-label="ギャラリー">
+  <div class="hero__carousel marquee" id="hero-carousel" aria-label="撮影写真のギャラリー">
+    <div class="marquee__track" id="hero-track"></div>
+  </div>
+  <div class="hero__copy">
+    <h1 class="hero__title">
+      <span class="hero__title-en">Ordinary Days,<br>Lasting Memories.</span>
+      <span class="hero__title-ja">何気ない今日を、<br>未来の宝物に。</span>
+    </h1>
+    <p class="hero__credit">Photographer Keiko<span class="hero__credit-sep" aria-hidden="true"></span>Miyazaki / Miyakonojo</p>
+    <div class="hero__actions">
+      <a class="btn btn--ghost" href="#scene" data-scroll>VIEW GALLERY</a>
+      <a class="btn btn--solid" href="#contact" data-scroll>撮影について相談する</a>
+    </div>
+  </div>
+  <div class="hero__scroll" aria-hidden="true"><span>SCROLL</span></div>
+</section>
+
+<!-- ============================ Select Scene ============================ -->
+<section class="section scene" id="scene">
+  <div class="section__inner">
+    <header class="section__head">
+      <p class="section__label"><span class="section__dot" aria-hidden="true"></span>Select Scene</p>
+      <h2 class="section__title">撮りたいシーンを選ぶ</h2>
+    </header>
+    <ul class="scene__grid" id="scene-grid"></ul>
+    <div class="section__cta">
+      <a class="btn btn--ghost" href="#contact" data-scroll>VIEW ALL SCENES</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ About ============================ -->
+<section class="section about" id="about">
+  <div class="about__inner">
+    <figure class="about__photo reveal">
+      <img src="images/photos/hukuoka143.webp" alt="花嫁を撮影するフォトグラファーKeikoの後ろ姿" loading="lazy" width="1600" height="1067">
+      <figcaption class="about__photo-caption" aria-hidden="true">HIBINONE PHOTO STUDIO</figcaption>
+    </figure>
+    <div class="about__body">
+      <header class="section__head section__head--left">
+        <p class="section__label"><span class="section__dot" aria-hidden="true"></span>Photographer Keiko</p>
+        <h2 class="section__title">なぜ写真を残した方が<br class="sp-only">いいのか？</h2>
+      </header>
+      <div class="about__text reveal">
+        <p>時々、昔の写真を見返すことがあります。</p>
+        <p>その写真には、もう会えない大切な家族が写っています。</p>
+        <p>写真を眺めていると一番心に響くのは、特別な記念日の写真ではなく、何気ない日常を写した一枚です。</p>
+        <p class="about__quiet">何気なく笑っている姿。<br>一緒に食卓を囲んでいる時間。<br>何気ないしぐさや表情。</p>
+        <p>そんな一枚を見るたびに、その日の空気や笑い声、温もりまで思い出し、胸があたたかくなります。</p>
+        <p>私は現在、小学5年生と中学3年生、2人の子どもを育てる母でもあります。</p>
+        <p>日々の暮らしに追われていると、時間は本当にあっという間に過ぎていきます。</p>
+        <p>子どもの成長も、家族との何気ない日常も、その時は当たり前に感じていても、二度と同じ瞬間は戻ってきません。</p>
+        <p>だから私は、ただ「きれいな写真」を撮るのではなく、その場の空気や笑い声まで思い出せるような一枚を残したいと思っています。</p>
+        <p>10年後、20年後に写真を開いたとき、大切な人と笑い合える時間につながる写真を、一枚一枚心を込めて撮影していきたいです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Portrait Plan ============================ -->
+<section class="section price" id="price">
+  <div class="section__inner">
+    <header class="section__head">
+      <p class="section__label"><span class="section__dot" aria-hidden="true"></span>Portrait Plan</p>
+      <h2 class="section__title">ポートレート撮影プラン</h2>
+      <p class="section__lead">家族写真、七五三、成人式、入学卒業、バースデーフォト、ペット撮影、プロフィール撮影など、個人向け撮影の料金です。<br>商品撮影、店舗撮影、取材撮影、イベント撮影、幼稚園保育園撮影は、内容に応じて別途お見積もりします。</p>
+    </header>
+
+    <div class="price__plans" id="plan-cards"></div>
+
+    <h3 class="price__sub"><span class="price__sub-en">Session Fee</span>撮影時間別料金<span class="price__tax">（税込）</span></h3>
+    <div class="price__grid" id="price-cards"></div>
+
+    <div class="price__notes" id="price-notes"></div>
+  </div>
+</section>
+
+<!-- ============================ Studio & Hair Make ============================ -->
+<section class="section studio" id="studio">
+  <div class="section__inner">
+    <header class="section__head">
+      <p class="section__label"><span class="section__dot" aria-hidden="true"></span>Studio &amp; Hair Make</p>
+      <h2 class="section__title">スタジオ・美容師の手配</h2>
+    </header>
+    <div class="studio__panel reveal">
+      <div class="studio__cols">
+        <div class="studio__item">
+          <span class="studio__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20 24 8l16 12"/><path d="M12 18v20h24V18"/><path d="M20 38v-10h8v10"/></svg>
+          </span>
+          <h3 class="studio__name">スタジオ手配</h3>
+          <p>スタジオ撮影をご希望の場合は、撮影内容やイメージに合わせて、こちらでスタジオの手配も可能です。</p>
+        </div>
+        <div class="studio__item">
+          <span class="studio__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8c8 4 8 12 2 18"/><path d="M34 8c-8 4-8 12-2 18"/><path d="M24 14v26"/><path d="M16 40h16"/></svg>
+          </span>
+          <h3 class="studio__name">美容師紹介</h3>
+          <p>ヘアセットやメイクをご希望の方には、美容師をご紹介します。</p>
+        </div>
+      </div>
+      <p class="studio__lead">ご希望のイメージ、撮影人数、撮影内容を確認したうえで、ご案内します。</p>
+      <ul class="studio__caution">
+        <li>※スタジオ利用料、美容師への依頼料、交通費などは別途必要です。</li>
+        <li>※内容を確認後、事前にお見積もりをご案内します。</li>
+      </ul>
+      <div class="section__cta section__cta--tight">
+        <a class="btn btn--solid" href="#contact" data-scroll data-prefill-location="スタジオ撮影">スタジオ撮影について相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Voice ============================ -->
+<section class="section voice" id="voice">
+  <div class="section__inner section__inner--wide">
+    <header class="section__head">
+      <p class="section__label"><span class="section__dot" aria-hidden="true"></span>Voice</p>
+      <h2 class="section__title">お客様の声</h2>
+    </header>
+    <div class="voice__wrap">
+      <button class="voice__arrow voice__arrow--prev" id="voice-prev" aria-label="前のお客様の声へ">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <ul class="voice__list" id="voice-list" tabindex="0" aria-label="お客様の声一覧（横にスクロールできます）"></ul>
+      <button class="voice__arrow voice__arrow--next" id="voice-next" aria-label="次のお客様の声へ">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Instagram ============================ -->
+<section class="section insta" id="instagram">
+  <div class="insta__bg" aria-hidden="true"><img id="insta-bg" src="" alt="" loading="lazy"></div>
+  <div class="insta__front">
+    <header class="section__head section__head--onphoto">
+      <p class="section__label"><span class="section__dot" aria-hidden="true"></span>Instagram</p>
+      <h2 class="section__title">インスタグラム</h2>
+    </header>
+    <div class="insta__carousel marquee" id="insta-carousel" aria-label="Instagram投稿">
+      <div class="marquee__track" id="insta-track"></div>
+    </div>
+    <div class="insta__foot">
+      <a class="btn btn--ghost btn--onphoto" id="insta-btn" href="#" target="_blank" rel="noopener">OFFICIAL INSTAGRAM</a>
+      <p class="insta__note">日々の撮影や何気ない瞬間を、Instagramでも更新しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="section faq" id="faq">
+  <div class="section__inner section__inner--narrow">
+    <header class="section__head">
+      <p class="section__label"><span class="section__dot" aria-hidden="true"></span>FAQ</p>
+      <h2 class="section__title">よくある質問</h2>
+      <p class="section__lead">撮影について、よくいただくご質問をまとめました。<br>こちらにないご質問も、お問い合わせフォームからご相談ください。</p>
+    </header>
+    <div class="faq__list" id="faq-list"></div>
+    <div class="section__cta">
+      <a class="btn btn--solid" href="#contact" data-scroll>撮影について問い合わせる</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Contact ============================ -->
+<section class="section contact" id="contact">
+  <div class="section__inner section__inner--narrow">
+    <header class="section__head">
+      <p class="section__label"><span class="section__dot" aria-hidden="true"></span>Contact</p>
+      <h2 class="section__title">撮影について相談する</h2>
+      <p class="section__lead">撮影内容が決まっていない段階でも大丈夫です。<br>ご希望や気になっていることを、わかる範囲でお知らせください。</p>
+    </header>
+
+    <form class="contact__form" id="contact-form" novalidate>
+      <!-- ハニーポット（スパム対策・画面には表示されません） -->
+      <input type="text" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <fieldset class="form-block">
+        <legend class="form-block__title"><span class="form-block__no">1</span>お客様情報</legend>
+
+        <div class="form-row">
+          <label class="form-label" for="f-name">お名前<span class="req">必須</span></label>
+          <input class="form-input" type="text" id="f-name" name="お名前" autocomplete="name" required>
+          <p class="form-error" data-error-for="f-name"></p>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="f-kana">ふりがな</label>
+          <input class="form-input" type="text" id="f-kana" name="ふりがな" autocomplete="off">
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="f-email">メールアドレス<span class="req">必須</span></label>
+          <input class="form-input" type="email" id="f-email" name="メールアドレス" autocomplete="email" inputmode="email" required>
+          <p class="form-error" data-error-for="f-email"></p>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="f-tel">電話番号</label>
+          <input class="form-input" type="tel" id="f-tel" name="電話番号" autocomplete="tel" inputmode="tel">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-block">
+        <legend class="form-block__title"><span class="form-block__no">2</span>撮影のご希望</legend>
+
+        <div class="form-row">
+          <label class="form-label" for="f-scene">希望する撮影内容<span class="req">必須</span></label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="f-scene" name="希望する撮影内容" required>
+              <option value="">選択してください</option>
+            </select>
+          </div>
+          <p class="form-error" data-error-for="f-scene"></p>
+        </div>
+
+        <div class="form-row">
+          <span class="form-label" id="label-plan">希望するプラン</span>
+          <div class="form-radios" role="radiogroup" aria-labelledby="label-plan" id="f-plan"></div>
+        </div>
+
+        <div class="form-row">
+          <span class="form-label" id="label-duration">希望する撮影時間</span>
+          <div class="form-radios" role="radiogroup" aria-labelledby="label-duration" id="f-duration"></div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="f-location">希望する撮影場所</label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="f-location" name="希望する撮影場所">
+              <option value="">選択してください</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row form-row--half">
+          <div>
+            <label class="form-label" for="f-date1">希望日</label>
+            <input class="form-input" type="date" id="f-date1" name="希望日">
+          </div>
+          <div>
+            <label class="form-label" for="f-date2">予備日</label>
+            <input class="form-input" type="date" id="f-date2" name="予備日">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="f-people">撮影人数</label>
+          <input class="form-input form-input--short" type="text" id="f-people" name="撮影人数" placeholder="例：大人2名・子ども2名" autocomplete="off">
+        </div>
+
+        <div class="form-row">
+          <span class="form-label" id="label-studio">スタジオ手配の希望</span>
+          <div class="form-radios" role="radiogroup" aria-labelledby="label-studio" id="f-studio"></div>
+        </div>
+
+        <!-- スタジオ撮影を選んだときだけ表示 -->
+        <div class="form-row form-studio-extra" id="studio-extra" hidden>
+          <div class="form-studio-extra__inner">
+            <p class="form-studio-extra__title">スタジオ撮影のご希望について</p>
+            <label class="form-label form-label--small" for="f-studio-area">希望エリア</label>
+            <input class="form-input" type="text" id="f-studio-area" name="スタジオ希望エリア" placeholder="例：都城市内">
+            <label class="form-label form-label--small" for="f-studio-mood">希望する雰囲気</label>
+            <input class="form-input" type="text" id="f-studio-mood" name="スタジオ希望の雰囲気" placeholder="例：白壁のナチュラルなスタジオ">
+            <label class="form-label form-label--small" for="f-studio-people">撮影人数</label>
+            <input class="form-input" type="text" id="f-studio-people" name="スタジオ撮影人数" placeholder="例：4名">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <span class="form-label" id="label-hairmake">美容師紹介の希望</span>
+          <div class="form-radios" role="radiogroup" aria-labelledby="label-hairmake" id="f-hairmake"></div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-block">
+        <legend class="form-block__title"><span class="form-block__no">3</span>ご相談内容</legend>
+
+        <div class="form-row">
+          <label class="form-label" for="f-message">お問い合わせ内容<span class="req">必須</span></label>
+          <textarea class="form-textarea" id="f-message" name="お問い合わせ内容" rows="6" required placeholder="撮りたいシーン、残したい雰囲気、気になっていることなど、自由にお書きください。"></textarea>
+          <p class="form-error" data-error-for="f-message"></p>
+        </div>
+
+        <div class="form-row">
+          <label class="form-agree">
+            <input type="checkbox" id="f-agree" required>
+            <span><a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>を確認し、個人情報の取り扱いに同意します。<span class="req">必須</span></span>
+          </label>
+          <p class="form-error" data-error-for="f-agree"></p>
+        </div>
+      </fieldset>
+
+      <p class="form-error form-error--global" id="form-global-error" role="alert"></p>
+
+      <div class="contact__submit">
+        <button class="btn btn--solid btn--large" type="submit" id="submit-btn">内容を確認して送信する</button>
+      </div>
+    </form>
+
+    <div class="contact__done" id="contact-done" hidden tabindex="-1">
+      <p class="contact__done-en" aria-hidden="true">Thank you.</p>
+      <p>お問い合わせありがとうございます。</p>
+      <p>内容を確認のうえ、ご入力いただいたメールアドレスへご連絡します。</p>
+      <p>数日経っても返信がない場合は、迷惑メールフォルダをご確認のうえ、再度お問い合わせください。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ Footer ============================ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <span class="footer__logo-frame">
+        <img src="images/logo.webp" alt="ヒビノネ写真館 ロゴ" width="72" height="72" loading="lazy">
+      </span>
+      <p class="footer__name">HIBINONE PHOTO STUDIO</p>
+      <p class="footer__meta">Photographer Keiko<br>Miyazaki / Miyakonojo</p>
+      <span class="footer__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <nav class="footer__nav" aria-label="フッターメニュー">
+      <ul>
+        <li><a href="#about"   data-scroll>ABOUT</a></li>
+        <li><a href="#scene"   data-scroll>SCENE</a></li>
+        <li><a href="#gallery" data-scroll>GALLERY</a></li>
+        <li><a href="#price"   data-scroll>PRICE</a></li>
+      </ul>
+      <ul>
+        <li><a href="#voice"   data-scroll>VOICE</a></li>
+        <li><a href="#faq"     data-scroll>FAQ</a></li>
+        <li><a href="#contact" data-scroll>CONTACT</a></li>
+        <li><a href="privacy.html">PRIVACY POLICY</a></li>
+      </ul>
+    </nav>
+    <div class="footer__sns">
+      <a id="footer-insta" href="#" target="_blank" rel="noopener" aria-label="Instagram（別タブで開きます）">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+  </div>
+  <p class="footer__copy">&copy; HIBINONE PHOTO STUDIO</p>
+</footer>
+
+<script src="js/site-config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
