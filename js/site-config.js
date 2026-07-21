@@ -90,7 +90,10 @@ const SITE_CONFIG = {
       desc: "誕生日の記念を、あたたかな雰囲気で残します。" },
     { no: "10", en: "Bridal",       ja: "ブライダル撮影",
       image: "images/sq/hukuoka083.webp", alt: "街を歩く新郎新婦の前撮り写真",
-      desc: "前撮り、後撮り、ふたりらしい自然なブライダルフォトに対応します。" },
+      desc: "前撮り、後撮り、ふたりらしい自然なブライダルフォトに対応します。",
+      gallery: Array.from({ length: 133 }, (_, i) => i + 1)
+        .filter((n) => ![22, 27, 58, 64, 71, 89].includes(n))
+        .map((n) => `images/scenes/bridal/bridal${String(n).padStart(3, "0")}.webp`) },
     { no: "11", en: "Pet",          ja: "ペット撮影",
       image: "", alt: "ペット撮影（写真は準備中です）",   /* 写真が用意でき次第差し替え */
       desc: "大切な家族であるペットの自然な表情を撮影します。" },

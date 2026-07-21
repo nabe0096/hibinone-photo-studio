@@ -235,13 +235,13 @@
       </svg>
     </span>`;
 
-  C.scenes.forEach((s) => {
+  C.scenes.forEach((s, index) => {
     const li = el("li", "scene-card");
     const photo = s.image
       ? `<img src="${esc(s.image)}" alt="${esc(s.alt)}" loading="lazy" width="900" height="900">`
       : PLACEHOLDER_SVG;
     li.innerHTML = `
-      <button type="button" class="scene-card__link" aria-expanded="false">
+      <button type="button" class="scene-card__link" data-scene-index="${index}" aria-haspopup="dialog">
         <span class="scene-card__meta">
           <span class="scene-card__en">${esc(s.en)}</span>
           <span class="scene-card__no">${esc(s.no)}</span>
@@ -253,25 +253,99 @@
     sceneGrid.appendChild(li);
   });
 
+  const sceneModal = el("div", "scene-modal");
+  sceneModal.setAttribute("role", "dialog");
+  sceneModal.setAttribute("aria-modal", "true");
+  sceneModal.setAttribute("aria-hidden", "true");
+  sceneModal.innerHTML = `
+    <button type="button" class="scene-modal__close" aria-label="写真を閉じる">×</button>
+    <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">‹</button>
+    <figure class="scene-modal__figure">
+      <img class="scene-modal__img" src="" alt="">
+      <figcaption class="scene-modal__caption">
+        <span class="scene-modal__title"></span>
+        <span class="scene-modal__count"></span>
+      </figcaption>
+    </figure>
+    <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">›</button>`;
+  document.body.appendChild(sceneModal);
+
+  const modalImg = $(".scene-modal__img", sceneModal);
+  const modalTitle = $(".scene-modal__title", sceneModal);
+  const modalCount = $(".scene-modal__count", sceneModal);
+  const prevBtn = $(".scene-modal__nav--prev", sceneModal);
+  const nextBtn = $(".scene-modal__nav--next", sceneModal);
+  const closeBtn = $(".scene-modal__close", sceneModal);
+  let activeGallery = [];
+  let activeScene = null;
+  let activePhoto = 0;
+
+  function getSceneGallery(scene) {
+    if (Array.isArray(scene.gallery) && scene.gallery.length) return scene.gallery;
+    return scene.image ? [scene.image] : [];
+  }
+
+  function renderScenePhoto(direction) {
+    if (!activeGallery.length || !activeScene) return;
+    const src = activeGallery[activePhoto];
+    modalImg.classList.remove("is-visible", "is-from-prev", "is-from-next");
+    modalImg.classList.add(direction === "prev" ? "is-from-prev" : "is-from-next");
+    window.setTimeout(() => {
+      modalImg.src = src;
+      modalImg.alt = `${activeScene.ja} ${activePhoto + 1}`;
+      modalTitle.textContent = activeScene.ja;
+      modalCount.textContent = `${activePhoto + 1} / ${activeGallery.length}`;
+      prevBtn.hidden = activeGallery.length < 2;
+      nextBtn.hidden = activeGallery.length < 2;
+    }, 90);
+  }
+
+  modalImg.addEventListener("load", () => {
+    modalImg.classList.add("is-visible");
+  });
+
+  function moveScenePhoto(step) {
+    if (activeGallery.length < 2) return;
+    activePhoto = (activePhoto + step + activeGallery.length) % activeGallery.length;
+    renderScenePhoto(step < 0 ? "prev" : "next");
+  }
+
+  function openSceneGallery(scene, startIndex = 0) {
+    const gallery = getSceneGallery(scene);
+    if (!gallery.length) return;
+    activeScene = scene;
+    activeGallery = gallery;
+    activePhoto = startIndex;
+    sceneModal.setAttribute("aria-hidden", "false");
+    sceneModal.classList.add("is-open");
+    document.body.classList.add("is-modal-open");
+    renderScenePhoto("next");
+    closeBtn.focus({ preventScroll: true });
+  }
+
+  function closeSceneGallery() {
+    sceneModal.classList.remove("is-open");
+    sceneModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("is-modal-open");
+  }
+
   sceneGrid.addEventListener("click", (e) => {
     const btn = e.target.closest(".scene-card__link");
     if (!btn) return;
-    const card = btn.closest(".scene-card");
-    const willOpen = !card.classList.contains("is-open");
-    $$(".scene-card.is-open", sceneGrid).forEach((c) => {
-      c.classList.remove("is-open");
-      $(".scene-card__link", c).setAttribute("aria-expanded", "false");
-    });
-    card.classList.toggle("is-open", willOpen);
-    btn.setAttribute("aria-expanded", String(willOpen));
+    openSceneGallery(C.scenes[Number(btn.dataset.sceneIndex)]);
   });
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".scene-card")) {
-      $$(".scene-card.is-open").forEach((c) => {
-        c.classList.remove("is-open");
-        $(".scene-card__link", c).setAttribute("aria-expanded", "false");
-      });
-    }
+
+  prevBtn.addEventListener("click", () => moveScenePhoto(-1));
+  nextBtn.addEventListener("click", () => moveScenePhoto(1));
+  closeBtn.addEventListener("click", closeSceneGallery);
+  sceneModal.addEventListener("click", (e) => {
+    if (e.target === sceneModal) closeSceneGallery();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!sceneModal.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeSceneGallery();
+    if (e.key === "ArrowLeft") moveScenePhoto(-1);
+    if (e.key === "ArrowRight") moveScenePhoto(1);
   });
 
   /* ----------------------------------------------------------
