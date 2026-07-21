@@ -72,7 +72,9 @@ const SITE_CONFIG = {
       desc: "盛り付けや調理を含めて、一貫して撮影対応できます。" },
     { no: "04", en: "Store",        ja: "店舗撮影",
       image: "images/sq/dsc06797_2.webp", alt: "炭火の上で炎に包まれる焼き場",
-      desc: "店舗の魅力が伝わる写真撮影に加えて、SNS用の撮影方法をレクチャーするプランもあります。" },
+      desc: "店舗の魅力が伝わる写真撮影に加えて、SNS用の撮影方法をレクチャーするプランもあります。",
+      gallery: Array.from({ length: 39 }, (_, i) =>
+        `images/scenes/store/store${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "05", en: "Interview",    ja: "取材撮影",
       image: "images/sq/jigyousyo006.webp", alt: "木材を加工する職人の作業風景",
       desc: "インタビューや取材記事向けの撮影に対応します。" },
