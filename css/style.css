@@ -547,36 +547,6 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: 16px;
 }
 
-/* 説明ポップ（クリック/ホバーで表示） */
-.scene-card__desc {
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 2px);
-  transform: translateX(-50%) translateY(6px);
-  width: min(260px, 78vw);
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 14px 16px;
-  font-size: 12px;
-  line-height: 1.9;
-  text-align: left;
-  color: var(--ink-soft);
-  box-shadow: 0 10px 30px rgba(17, 17, 17, 0.08);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  z-index: 20;
-  pointer-events: none;
-}
-.scene-card.is-open .scene-card__desc,
-.scene-card__link:hover + .scene-card__desc,
-.scene-card__link:focus-visible + .scene-card__desc {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
 .is-modal-open { overflow: hidden; }
 
 .scene-modal {
@@ -599,12 +569,12 @@ button { font-family: inherit; cursor: pointer; }
 }
 .scene-modal__figure {
   width: min(1180px, 86vw);
-  height: min(760px, 78svh);
+  max-height: 84svh;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto auto;
   justify-items: center;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   margin: 0;
   transform: scale(0.9) translateY(18px);
   opacity: 0;
@@ -616,7 +586,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .scene-modal__img {
   max-width: 100%;
-  max-height: 100%;
+  max-height: min(680px, 64svh);
   width: auto;
   height: auto;
   object-fit: contain;
@@ -641,6 +611,15 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.24em;
+  color: var(--ink-soft);
+}
+.scene-modal__desc {
+  max-width: min(620px, 82vw);
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
   color: var(--ink-soft);
 }
 .scene-modal__title {
@@ -680,11 +659,15 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 26px;
 }
 .scene-modal__nav {
-  position: absolute;
-  top: 50%;
-  width: clamp(44px, 5vw, 58px);
-  height: clamp(44px, 5vw, 58px);
-  transform: translateY(-50%);
+  width: clamp(42px, 4.4vw, 52px);
+  height: clamp(42px, 4.4vw, 52px);
+}
+.scene-modal__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 2px;
 }
 .scene-modal__nav svg {
   width: 46%;
@@ -695,18 +678,16 @@ button { font-family: inherit; cursor: pointer; }
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.scene-modal__nav:hover { transform: translateY(-50%) scale(1.06); }
-.scene-modal__nav--prev { left: clamp(12px, 3vw, 34px); }
-.scene-modal__nav--next { right: clamp(12px, 3vw, 34px); }
+.scene-modal__nav:hover { transform: scale(1.06); }
 .scene-modal__nav[hidden] { display: none; }
 
 @media (max-width: 767px) {
   .scene-modal { padding: 18px 14px; }
   .scene-modal__figure {
     width: 100%;
-    height: 78svh;
-    gap: 12px;
+    gap: 10px;
   }
+  .scene-modal__img { max-height: 52svh; }
   .scene-modal__caption {
     flex-direction: column;
     gap: 4px;
@@ -718,19 +699,24 @@ button { font-family: inherit; cursor: pointer; }
     font-size: 24px;
   }
   .scene-modal__nav {
-    top: calc(50% - 28px);
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     background: rgba(255, 255, 255, 0.74);
   }
-  .scene-modal__nav--prev { left: 10px; }
-  .scene-modal__nav--next { right: 10px; }
   .scene-modal__nav svg {
     width: 48%;
     height: 48%;
   }
-  .scene-modal__nav:hover { transform: translateY(-50%) scale(1.06); }
+  .scene-modal__controls {
+    gap: 18px;
+    margin-top: 4px;
+  }
+  .scene-modal__desc {
+    max-width: 86vw;
+    font-size: 11.5px;
+    line-height: 1.8;
+  }
+  .scene-modal__nav:hover { transform: scale(1.06); }
 }
 
 /* ============================================================

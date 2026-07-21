@@ -248,8 +248,7 @@
         </span>
         <span class="scene-card__circle">${photo}</span>
         <span class="scene-card__ja">${esc(s.ja)}</span>
-      </button>
-      <div class="scene-card__desc" role="note">${esc(s.desc)}</div>`;
+      </button>`;
     sceneGrid.appendChild(li);
   });
 
@@ -259,24 +258,29 @@
   sceneModal.setAttribute("aria-hidden", "true");
   sceneModal.innerHTML = `
     <button type="button" class="scene-modal__close" aria-label="写真を閉じる">×</button>
-    <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
-    </button>
     <figure class="scene-modal__figure">
       <img class="scene-modal__img" src="" alt="">
+      <div class="scene-modal__controls" aria-label="写真送り">
+        <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+        </button>
+        <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+      </div>
       <figcaption class="scene-modal__caption">
         <span class="scene-modal__title"></span>
         <span class="scene-modal__count"></span>
       </figcaption>
+      <p class="scene-modal__desc"></p>
     </figure>
-    <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-    </button>`;
+    `;
   document.body.appendChild(sceneModal);
 
   const modalImg = $(".scene-modal__img", sceneModal);
   const modalTitle = $(".scene-modal__title", sceneModal);
   const modalCount = $(".scene-modal__count", sceneModal);
+  const modalDesc = $(".scene-modal__desc", sceneModal);
   const prevBtn = $(".scene-modal__nav--prev", sceneModal);
   const nextBtn = $(".scene-modal__nav--next", sceneModal);
   const closeBtn = $(".scene-modal__close", sceneModal);
@@ -299,6 +303,7 @@
       modalImg.alt = `${activeScene.ja} ${activePhoto + 1}`;
       modalTitle.textContent = activeScene.ja;
       modalCount.textContent = `${activePhoto + 1} / ${activeGallery.length}`;
+      modalDesc.textContent = activeScene.desc || "";
       prevBtn.hidden = activeGallery.length < 2;
       nextBtn.hidden = activeGallery.length < 2;
     }, 90);
