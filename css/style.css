@@ -602,6 +602,37 @@ button { font-family: inherit; cursor: pointer; }
   opacity: 1;
   transform: translateX(0) scale(1);
 }
+.scene-modal__placeholder {
+  width: min(100%, 980px);
+  aspect-ratio: 3 / 2;
+  max-height: min(680px, 64svh);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 3px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(250, 250, 248, 0.35)),
+    #f1f0ec;
+  box-shadow: 0 22px 70px rgba(17, 17, 17, 0.12);
+  color: var(--ink-soft);
+}
+.scene-modal__placeholder[hidden],
+.scene-modal__img[hidden] {
+  display: none;
+}
+.scene-modal__placeholder-en {
+  font-family: var(--font-en);
+  font-size: clamp(22px, 4vw, 46px);
+  letter-spacing: 0.24em;
+  color: rgba(17, 17, 17, 0.36);
+}
+.scene-modal__placeholder-ja {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: rgba(17, 17, 17, 0.52);
+}
 .scene-modal__caption {
   width: 100%;
   display: flex;
@@ -687,7 +718,10 @@ button { font-family: inherit; cursor: pointer; }
     width: 100%;
     gap: 10px;
   }
-  .scene-modal__img { max-height: 52svh; }
+  .scene-modal__img,
+  .scene-modal__placeholder { max-height: 52svh; }
+  .scene-modal__placeholder-en { font-size: clamp(20px, 8vw, 34px); }
+  .scene-modal__placeholder-ja { font-size: 12px; }
   .scene-modal__caption {
     flex-direction: column;
     gap: 4px;

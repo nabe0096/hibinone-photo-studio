@@ -71,7 +71,7 @@ const SITE_CONFIG = {
       image: "images/sq/dsc01608.webp", alt: "彩り豊かな唐揚げ弁当の商品写真",
       desc: "盛り付けや調理を含めて、一貫して撮影対応できます。" },
     { no: "04", en: "Store",        ja: "店舗撮影",
-      image: "images/sq/dsc06797_2.webp", alt: "炭火の上で炎に包まれる焼き場",
+      image: "images/scenes/store/store001.webp", alt: "店舗撮影の作例写真",
       desc: "店舗の魅力が伝わる写真撮影に加えて、SNS用の撮影方法をレクチャーするプランもあります。",
       gallery: Array.from({ length: 39 }, (_, i) =>
         `images/scenes/store/store${String(i + 1).padStart(3, "0")}.webp`) },
@@ -91,7 +91,7 @@ const SITE_CONFIG = {
       image: "images/sq/half_birthday131.webp", alt: "公園で赤ちゃんを高く抱き上げる家族",
       desc: "誕生日の記念を、あたたかな雰囲気で残します。" },
     { no: "10", en: "Bridal",       ja: "ブライダル撮影",
-      image: "images/sq/hukuoka083.webp", alt: "街を歩く新郎新婦の前撮り写真",
+      image: "images/scenes/bridal/bridal001.webp", alt: "ブライダル撮影の作例写真",
       desc: "前撮り、後撮り、ふたりらしい自然なブライダルフォトに対応します。",
       gallery: Array.from({ length: 133 }, (_, i) => i + 1)
         .filter((n) => ![22, 27, 58, 64, 71, 89].includes(n))

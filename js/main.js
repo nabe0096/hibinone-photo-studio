@@ -260,6 +260,10 @@
     <button type="button" class="scene-modal__close" aria-label="写真を閉じる">×</button>
     <figure class="scene-modal__figure">
       <img class="scene-modal__img" src="" alt="">
+      <div class="scene-modal__placeholder" hidden>
+        <span class="scene-modal__placeholder-en">Preparing</span>
+        <span class="scene-modal__placeholder-ja">写真は準備中です</span>
+      </div>
       <div class="scene-modal__controls" aria-label="写真送り">
         <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
@@ -278,6 +282,7 @@
   document.body.appendChild(sceneModal);
 
   const modalImg = $(".scene-modal__img", sceneModal);
+  const modalPlaceholder = $(".scene-modal__placeholder", sceneModal);
   const modalTitle = $(".scene-modal__title", sceneModal);
   const modalCount = $(".scene-modal__count", sceneModal);
   const modalDesc = $(".scene-modal__desc", sceneModal);
@@ -290,12 +295,28 @@
 
   function getSceneGallery(scene) {
     if (Array.isArray(scene.gallery) && scene.gallery.length) return scene.gallery;
-    return scene.image ? [scene.image] : [];
+    return [];
   }
 
   function renderScenePhoto(direction) {
-    if (!activeGallery.length || !activeScene) return;
+    if (!activeScene) return;
+    if (!activeGallery.length) {
+      modalImg.classList.remove("is-visible", "is-from-prev", "is-from-next");
+      modalImg.hidden = true;
+      modalImg.removeAttribute("src");
+      modalImg.alt = "";
+      modalPlaceholder.hidden = false;
+      modalTitle.textContent = activeScene.ja;
+      modalCount.textContent = "準備中";
+      modalDesc.textContent = activeScene.desc || "";
+      prevBtn.hidden = true;
+      nextBtn.hidden = true;
+      return;
+    }
+
     const src = activeGallery[activePhoto];
+    modalImg.hidden = false;
+    modalPlaceholder.hidden = true;
     modalImg.classList.remove("is-visible", "is-from-prev", "is-from-next");
     modalImg.classList.add(direction === "prev" ? "is-from-prev" : "is-from-next");
     window.setTimeout(() => {
@@ -321,10 +342,9 @@
 
   function openSceneGallery(scene, startIndex = 0) {
     const gallery = getSceneGallery(scene);
-    if (!gallery.length) return;
     activeScene = scene;
     activeGallery = gallery;
-    activePhoto = startIndex;
+    activePhoto = gallery.length ? startIndex : 0;
     sceneModal.setAttribute("aria-hidden", "false");
     sceneModal.classList.add("is-open");
     document.body.classList.add("is-modal-open");
