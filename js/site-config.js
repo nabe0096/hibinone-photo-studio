@@ -104,8 +104,10 @@ const SITE_CONFIG = {
         .filter((n) => ![22, 27, 58, 64, 71, 89].includes(n))
         .map((n) => `images/scenes/bridal/bridal${String(n).padStart(3, "0")}.webp`) },
     { no: "11", en: "Pet",          ja: "ペット撮影",
-      image: "", alt: "ペット撮影（写真は準備中です）",   /* 写真が用意でき次第差し替え */
-      desc: "大切な家族であるペットの自然な表情を撮影します。" },
+      image: "images/scenes/pet/pet001.webp", alt: "ペット撮影の作例写真",
+      desc: "大切な家族であるペットの自然な表情を撮影します。",
+      gallery: Array.from({ length: 32 }, (_, i) =>
+        `images/scenes/pet/pet${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "12", en: "Profile",      ja: "プロフィール撮影",
       image: "images/scenes/profile/profile001.webp", alt: "プロフィール撮影の作例写真",
       desc: "仕事用、SNS用、個人ブランド用など、幅広く対応します。",
