@@ -33,6 +33,28 @@
   }
 
   /* ----------------------------------------------------------
+     Loading
+  ---------------------------------------------------------- */
+  const loading = $("#loading");
+  const loadingStartedAt = Date.now();
+
+  function hideLoading() {
+    if (!loading) return;
+    const wait = Math.max(0, 700 - (Date.now() - loadingStartedAt));
+    window.setTimeout(() => {
+      loading.classList.add("is-hidden");
+      window.setTimeout(() => loading.remove(), 800);
+    }, wait);
+  }
+
+  if (document.readyState === "complete") {
+    hideLoading();
+  } else {
+    window.addEventListener("load", hideLoading, { once: true });
+    window.setTimeout(hideLoading, 3200);
+  }
+
+  /* ----------------------------------------------------------
      Header：スクロールで背景切り替え・ハンバーガー
   ---------------------------------------------------------- */
   const header = $("#header");
