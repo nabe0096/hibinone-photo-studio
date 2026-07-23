@@ -71,8 +71,10 @@ const SITE_CONFIG = {
       image: "images/sq/work183.webp", alt: "イベント会場で子どもを抱いて話す人々",
       desc: "催し、発表会、地域イベント、記念行事などに対応します。" },
     { no: "03", en: "Product",      ja: "商品撮影",
-      image: "images/sq/dsc01608.webp", alt: "彩り豊かな唐揚げ弁当の商品写真",
-      desc: "盛り付けや調理を含めて、一貫して撮影対応できます。" },
+      image: "images/scenes/product/product001.webp", alt: "商品撮影の作例写真",
+      desc: "盛り付けや調理を含めて、一貫して撮影対応できます。",
+      gallery: Array.from({ length: 41 }, (_, i) =>
+        `images/scenes/product/product${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "04", en: "Store",        ja: "店舗撮影",
       image: "images/scenes/store/store001.webp", alt: "店舗撮影の作例写真",
       desc: "店舗の魅力が伝わる写真撮影に加えて、SNS用の撮影方法をレクチャーするプランもあります。",
