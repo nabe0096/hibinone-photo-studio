@@ -133,6 +133,22 @@ button { font-family: inherit; cursor: pointer; }
 .btn--onphoto { border-color: #fff; color: #fff; }
 .btn--onphoto:hover { background: #fff; color: var(--black); }
 .btn--large { min-width: 300px; padding: 1.2em 2.5em; font-size: 14px; }
+.btn--ask {
+  min-width: 280px;
+  flex-direction: column;
+  gap: 4px;
+  padding: 1.05em 2.4em;
+  line-height: 1.45;
+}
+.btn__en {
+  font-family: var(--font-en);
+  font-size: 15px;
+  letter-spacing: 0.24em;
+}
+.btn__ja {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
 
 /* ============================================================
    Header
