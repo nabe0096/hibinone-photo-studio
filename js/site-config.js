@@ -62,8 +62,10 @@ const SITE_CONFIG = {
   ---------------------------------------------------------- */
   scenes: [
     { no: "01", en: "Daily",        ja: "日常撮影",
-      image: "images/sq/sakai024.webp", alt: "寝転んで赤ちゃんと笑い合う夫婦",
-      desc: "何気ない日々の表情や、家族の自然な時間を残す撮影です。" },
+      image: "images/scenes/daily/daily001.webp", alt: "日常撮影の作例写真",
+      desc: "何気ない日々の表情や、家族の自然な時間を残す撮影です。",
+      gallery: Array.from({ length: 41 }, (_, i) =>
+        `images/scenes/daily/daily${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "02", en: "Event",        ja: "イベント撮影",
       image: "images/sq/work183.webp", alt: "イベント会場で子どもを抱いて話す人々",
       desc: "催し、発表会、地域イベント、記念行事などに対応します。" },
@@ -100,8 +102,10 @@ const SITE_CONFIG = {
       image: "", alt: "ペット撮影（写真は準備中です）",   /* 写真が用意でき次第差し替え */
       desc: "大切な家族であるペットの自然な表情を撮影します。" },
     { no: "12", en: "Profile",      ja: "プロフィール撮影",
-      image: "images/sq/kiyoko021.webp", alt: "スタジオで自然に微笑む女性のプロフィール写真",
-      desc: "仕事用、SNS用、個人ブランド用など、幅広く対応します。" }
+      image: "images/scenes/profile/profile001.webp", alt: "プロフィール撮影の作例写真",
+      desc: "仕事用、SNS用、個人ブランド用など、幅広く対応します。",
+      gallery: Array.from({ length: 4 }, (_, i) =>
+        `images/scenes/profile/profile${String(i + 1).padStart(3, "0")}.webp`) }
   ],
 
   /* ----------------------------------------------------------
