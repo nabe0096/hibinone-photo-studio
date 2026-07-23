@@ -90,8 +90,10 @@ const SITE_CONFIG = {
       image: "images/sq/takami_753_073.webp", alt: "七五三の晴れ着姿で遊ぶ男の子",
       desc: "人生の節目を、自然な空気感とともに残します。" },
     { no: "08", en: "School Life",  ja: "入学卒業",
-      image: "images/sq/muraoka260403_008.webp", alt: "桜の下でランドセルを背負う兄妹",
-      desc: "成長の節目となる大切な瞬間を撮影します。" },
+      image: "images/scenes/school/school001.webp", alt: "入学卒業撮影の作例写真",
+      desc: "成長の節目となる大切な瞬間を撮影します。",
+      gallery: Array.from({ length: 46 }, (_, i) =>
+        `images/scenes/school/school${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "09", en: "Birthday",     ja: "バースデーフォト",
       image: "images/sq/half_birthday131.webp", alt: "公園で赤ちゃんを高く抱き上げる家族",
       desc: "誕生日の記念を、あたたかな雰囲気で残します。" },
