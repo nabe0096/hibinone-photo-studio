@@ -40,6 +40,7 @@ const SITE_CONFIG = {
      size: "tall"（縦長・大）/ "wide"（横長）/ "small"（小さめ）
   ---------------------------------------------------------- */
   heroPhotos: [
+    { src: "images/photos/bridal-top.webp",          size: "wide",  alt: "光の入る室内で見つめ合う新郎新婦" },
     { src: "images/photos/asahi210.webp",            size: "wide",  alt: "桜並木の下でおんぶをして笑い合う家族" },
     { src: "images/photos/tutumi077.webp",           size: "small", alt: "ニット帽をかぶった双子の赤ちゃんのニューボーンフォト" },
     { src: "images/photos/takami_753_073.webp",      size: "tall",  alt: "七五三で水風船を見つめる男の子" },
@@ -93,7 +94,7 @@ const SITE_CONFIG = {
       image: "images/sq/half_birthday131.webp", alt: "公園で赤ちゃんを高く抱き上げる家族",
       desc: "誕生日の記念を、あたたかな雰囲気で残します。" },
     { no: "10", en: "Bridal",       ja: "ブライダル撮影",
-      image: "images/scenes/bridal/bridal001.webp", alt: "ブライダル撮影の作例写真",
+      image: "images/photos/bridal-top.webp", alt: "光の入る室内で見つめ合う新郎新婦",
       desc: "前撮り、後撮り、ふたりらしい自然なブライダルフォトに対応します。",
       gallery: Array.from({ length: 133 }, (_, i) => i + 1)
         .filter((n) => ![22, 27, 58, 64, 71, 89].includes(n))
