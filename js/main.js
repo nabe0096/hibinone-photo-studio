@@ -32,6 +32,15 @@
     return esc(text).split("\n").filter(Boolean).map((t) => `<p>${t}</p>`).join("");
   }
 
+  function voiceParagraphs(text) {
+    return esc(text)
+      .split(/\n{2,}/)
+      .map((block) => block.replace(/\s*\n\s*/g, " ").trim())
+      .filter(Boolean)
+      .map((t) => `<p>${t}</p>`)
+      .join("");
+  }
+
   /* ----------------------------------------------------------
      Loading
   ---------------------------------------------------------- */
@@ -268,6 +277,27 @@
   ]).then(() => $(".hero__copy").classList.add("is-visible"));
 
   /* ----------------------------------------------------------
+     Portrait Photo Flow：プロフィール下の写真帯
+  ---------------------------------------------------------- */
+  const portraitFlow = $("#portrait-flow");
+  const portraitFlowTrack = $("#portrait-flow-track");
+  if (portraitFlow && portraitFlowTrack) {
+    const flowSizes = ["wide", "tall", "small", "wide", "small", "tall"];
+    const flowPhotos = (Array.isArray(C.heroPool) && C.heroPool.length)
+      ? shufflePhotos(C.heroPool).slice(0, Math.min(30, C.heroPool.length))
+      : [];
+
+    flowPhotos.forEach((p, i) => {
+      const size = flowSizes[i % flowSizes.length];
+      const item = el("figure", `portrait-flow__item portrait-flow__item--${size}`);
+      item.innerHTML = `<img src="${esc(p.src)}" alt="${esc(p.alt || "ヒビノネ写真館の撮影写真")}" loading="lazy" decoding="async">`;
+      portraitFlowTrack.appendChild(item);
+    });
+
+    if (flowPhotos.length) createMarquee(portraitFlow, portraitFlowTrack, 26);
+  }
+
+  /* ----------------------------------------------------------
      Select Scene
   ---------------------------------------------------------- */
   const sceneGrid = $("#scene-grid");
@@ -478,17 +508,17 @@
             <text><textPath href="#voice-arc-${i}" startOffset="50%" text-anchor="middle">Customer&#8217;s Voice</textPath></text>
           </svg>
           <div class="voice-card__photo">
-            <img src="${esc(v.image)}" alt="${esc(v.alt)}" loading="lazy" width="900" height="1080">
+            <img src="${esc(v.image)}" alt="${esc(v.alt)}" loading="lazy" width="900" height="1080" style="${v.focus ? `object-position: ${esc(v.focus)}` : ``}">
           </div>
         </figure>
         <p class="voice-card__name">${esc(v.name)}</p>
-        <div class="voice-card__text" data-state="${needsMore ? "short" : "full"}">${paragraphs(short)}</div>
+        <div class="voice-card__text" data-state="${needsMore ? "short" : "full"}">${voiceParagraphs(short)}</div>
         ${needsMore ? '<button type="button" class="voice-card__more">続きを読む</button>' : ""}`;
       if (needsMore) {
         $(".voice-card__more", li).addEventListener("click", (e) => {
           const box = $(".voice-card__text", li);
           const toFull = box.dataset.state === "short";
-          box.innerHTML = paragraphs(toFull ? full : short);
+          box.innerHTML = voiceParagraphs(toFull ? full : short);
           box.dataset.state = toFull ? "full" : "short";
           e.target.textContent = toFull ? "閉じる" : "続きを読む";
         });

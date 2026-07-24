@@ -405,47 +405,6 @@ const SITE_CONFIG = {
     { src: "images/scenes/pet/pet030.webp", size: "wide" },
     { src: "images/scenes/pet/pet031.webp", size: "wide" },
     { src: "images/scenes/pet/pet032.webp", size: "wide" },
-    { src: "images/scenes/product/product001.webp", size: "tall" },
-    { src: "images/scenes/product/product002.webp", size: "wide" },
-    { src: "images/scenes/product/product003.webp", size: "wide" },
-    { src: "images/scenes/product/product004.webp", size: "wide" },
-    { src: "images/scenes/product/product005.webp", size: "wide" },
-    { src: "images/scenes/product/product006.webp", size: "wide" },
-    { src: "images/scenes/product/product007.webp", size: "wide" },
-    { src: "images/scenes/product/product008.webp", size: "tall" },
-    { src: "images/scenes/product/product009.webp", size: "tall" },
-    { src: "images/scenes/product/product010.webp", size: "wide" },
-    { src: "images/scenes/product/product011.webp", size: "wide" },
-    { src: "images/scenes/product/product012.webp", size: "wide" },
-    { src: "images/scenes/product/product013.webp", size: "wide" },
-    { src: "images/scenes/product/product014.webp", size: "wide" },
-    { src: "images/scenes/product/product015.webp", size: "wide" },
-    { src: "images/scenes/product/product016.webp", size: "tall" },
-    { src: "images/scenes/product/product017.webp", size: "wide" },
-    { src: "images/scenes/product/product018.webp", size: "tall" },
-    { src: "images/scenes/product/product019.webp", size: "wide" },
-    { src: "images/scenes/product/product020.webp", size: "tall" },
-    { src: "images/scenes/product/product021.webp", size: "tall" },
-    { src: "images/scenes/product/product022.webp", size: "tall" },
-    { src: "images/scenes/product/product023.webp", size: "wide" },
-    { src: "images/scenes/product/product024.webp", size: "tall" },
-    { src: "images/scenes/product/product025.webp", size: "tall" },
-    { src: "images/scenes/product/product026.webp", size: "wide" },
-    { src: "images/scenes/product/product027.webp", size: "wide" },
-    { src: "images/scenes/product/product028.webp", size: "tall" },
-    { src: "images/scenes/product/product029.webp", size: "tall" },
-    { src: "images/scenes/product/product030.webp", size: "tall" },
-    { src: "images/scenes/product/product031.webp", size: "wide" },
-    { src: "images/scenes/product/product032.webp", size: "wide" },
-    { src: "images/scenes/product/product033.webp", size: "wide" },
-    { src: "images/scenes/product/product034.webp", size: "tall" },
-    { src: "images/scenes/product/product035.webp", size: "tall" },
-    { src: "images/scenes/product/product036.webp", size: "wide" },
-    { src: "images/scenes/product/product037.webp", size: "wide" },
-    { src: "images/scenes/product/product038.webp", size: "wide" },
-    { src: "images/scenes/product/product039.webp", size: "tall" },
-    { src: "images/scenes/product/product040.webp", size: "tall" },
-    { src: "images/scenes/product/product041.webp", size: "wide" },
     { src: "images/scenes/profile/profile001.webp", size: "wide" },
     { src: "images/scenes/profile/profile002.webp", size: "wide" },
     { src: "images/scenes/profile/profile003.webp", size: "wide" },
@@ -587,58 +546,50 @@ const SITE_CONFIG = {
       desc: "何気ない日々の表情や、家族の自然な時間を残す撮影です。",
       gallery: Array.from({ length: 41 }, (_, i) =>
         `images/scenes/daily/daily${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "02", en: "Coming of Age", ja: "成人式",
-      image: "images/scenes/coming/coming-cover.webp", alt: "成人式撮影の作例写真",
-      desc: "振袖や袴姿の晴れの日を、自然な表情とともに残します。",
-      gallery: Array.from({ length: 17 }, (_, i) =>
-        `images/scenes/coming/coming${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "03", en: "Food",         ja: "FOOD",
-      image: "images/scenes/product/product-cover.webp", alt: "FOOD撮影の作例写真",
+    { no: "02", en: "Food Menu",    ja: "商品メニュー撮影",
+      image: "images/scenes/product/product-cover.webp", alt: "商品メニュー撮影の作例写真",
       desc: "料理やメニュー、食材の魅力が伝わるように撮影します。",
       gallery: Array.from({ length: 41 }, (_, i) =>
         `images/scenes/product/product${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "04", en: "Store",        ja: "店舗撮影",
+    { no: "03", en: "Store",        ja: "店舗撮影",
       image: "images/scenes/store/store001.webp", alt: "店舗撮影の作例写真",
       desc: "店舗の魅力が伝わる写真撮影に加えて、SNS用の撮影方法をレクチャーするプランもあります。",
       gallery: Array.from({ length: 39 }, (_, i) =>
         `images/scenes/store/store${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "05", en: "Interview",    ja: "取材撮影",
-      image: "images/sq/jigyousyo006.webp", alt: "木材を加工する職人の作業風景",
-      desc: "インタビューや取材記事向けの撮影に対応します。" },
-    { no: "06", en: "Kindergarten", ja: "幼稚園保育園撮影",
-      image: "images/sq/koukun260228_061.webp", alt: "外遊びでボールを追いかける男の子",
-      desc: "園での自然な活動風景や行事を撮影します。" },
-    { no: "07", en: "Shichi-Go-San", ja: "七五三・七草",
+    { no: "04", en: "Memory",       ja: "記念撮影",
+      image: "images/scenes/memory/memory-cover.webp", alt: "記念撮影の作例写真",
+      desc: "誕生日や家族の節目を、あたたかな雰囲気で残します。",
+      gallery: Array.from({ length: 126 }, (_, i) =>
+        `images/scenes/memory/memory${String(i + 1).padStart(3, "0")}.webp`) },
+    { no: "05", en: "Pet",          ja: "ペット撮影",
+      image: "images/scenes/pet/pet-cover.webp", alt: "ペット撮影の作例写真",
+      desc: "大切な家族であるペットの自然な表情を撮影します。",
+      gallery: Array.from({ length: 32 }, (_, i) =>
+        `images/scenes/pet/pet${String(i + 1).padStart(3, "0")}.webp`) },
+    { no: "06", en: "Shichi-Go-San", ja: "七五三・七草",
       image: "images/scenes/shichigosan/shichigosan-cover.webp", alt: "七五三・七草撮影の作例写真",
       desc: "七五三や七草など、成長の節目を自然な空気感とともに残します。",
       gallery: Array.from({ length: 40 }, (_, i) =>
         `images/scenes/shichigosan/shichigosan${String(i + 1).padStart(3, "0")}.webp`) },
+    { no: "07", en: "Coming of Age", ja: "成人式",
+      image: "images/scenes/coming/coming-cover.webp", alt: "成人式撮影の作例写真",
+      desc: "振袖や袴姿の晴れの日を、自然な表情とともに残します。",
+      gallery: Array.from({ length: 17 }, (_, i) =>
+        `images/scenes/coming/coming${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "08", en: "School Life",  ja: "入学卒業",
       image: "images/scenes/school/school-cover.webp", alt: "入学卒業撮影の作例写真",
       desc: "成長の節目となる大切な瞬間を撮影します。",
       gallery: Array.from({ length: 46 }, (_, i) =>
         `images/scenes/school/school${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "09", en: "Memory",       ja: "記念日フォト",
-      image: "images/scenes/memory/memory-cover.webp", alt: "記念日フォトの作例写真",
-      desc: "誕生日や家族の節目を、あたたかな雰囲気で残します。",
-      gallery: Array.from({ length: 126 }, (_, i) =>
-        `images/scenes/memory/memory${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "10", en: "Bridal",       ja: "ブライダル撮影",
+    { no: "09", en: "Bridal",       ja: "ブライダル撮影",
       image: "images/photos/bridal-top.webp", alt: "光の入る室内で見つめ合う新郎新婦",
       desc: "前撮り、後撮り、ふたりらしい自然なブライダルフォトに対応します。",
       gallery: Array.from({ length: 133 }, (_, i) => i + 1)
         .filter((n) => ![22, 27, 58, 64, 71, 89].includes(n))
         .map((n) => `images/scenes/bridal/bridal${String(n).padStart(3, "0")}.webp`) },
-    { no: "11", en: "Pet",          ja: "ペット撮影",
-      image: "images/scenes/pet/pet-cover.webp", alt: "ペット撮影の作例写真",
-      desc: "大切な家族であるペットの自然な表情を撮影します。",
-      gallery: Array.from({ length: 32 }, (_, i) =>
-        `images/scenes/pet/pet${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "12", en: "Profile",      ja: "プロフィール撮影",
-      image: "images/scenes/profile/profile-cover.webp", alt: "プロフィール撮影の作例写真",
-      desc: "仕事用、SNS用、個人ブランド用など、幅広く対応します。",
-      gallery: Array.from({ length: 4 }, (_, i) =>
-        `images/scenes/profile/profile${String(i + 1).padStart(3, "0")}.webp`) }
+    { no: "10", en: "Kindergarten", ja: "幼稚園保育園撮影",
+      image: "images/sq/koukun260228_061.webp", alt: "外遊びでボールを追いかける男の子",
+      desc: "園での自然な活動風景や行事を撮影します。" }
   ],
 
   /* ----------------------------------------------------------
@@ -675,7 +626,7 @@ const SITE_CONFIG = {
   /* 撮影時間別料金（税込） */
   pricing: [
     { en: "30 MINUTES",  ja: "30分撮影",  price: "¥13,000", formValue: "30分",
-      notes: ["リタッチ済みデータ", "約100枚前後", "Googleフォト納品"] },
+      notes: ["リタッチ済みデータ", "約50枚前後", "Googleフォト納品"] },
     { en: "60 MINUTES",  ja: "1時間撮影", price: "¥20,000", formValue: "1時間",
       notes: ["リタッチ済みデータ", "撮影内容に応じた枚数", "Googleフォト納品"] },
     { en: "120 MINUTES", ja: "2時間撮影", price: "¥35,000", formValue: "2時間",
@@ -686,7 +637,7 @@ const SITE_CONFIG = {
 
   pricingNotes: [
     "撮影した写真は、一枚ずつ色味や明るさを整え、Googleフォトにて納品します。",
-    "30分撮影の場合、納品枚数は100枚前後が目安です。",
+    "30分撮影の場合、納品枚数は50枚前後が目安です。",
     "撮影内容、人数、当日の状況によって、納品枚数は前後します。"
   ],
 
@@ -708,21 +659,21 @@ const SITE_CONFIG = {
      published: false にすると非表示 / order の小さい順に表示
   ---------------------------------------------------------- */
   voices: [
-    { image: "images/photos/takami_753_208.webp", alt: "神社の参道で笑い合う七五三の家族",
-      name: "S.family", published: true, order: 1,
-      text: "子どもが人見知りなので少し心配していましたが、自然に声をかけてもらい、いつもの笑顔をたくさん残してもらえました。\n写真を見るたびに、その日の空気まで思い出せます。" },
-    { image: "images/photos/asahi227.webp", alt: "公園で抱き合う着物姿の家族",
-      name: "H.family", published: true, order: 2,
-      text: "家族みんなが緊張せず、普段どおりの雰囲気で撮影できました。\n何気ない表情やしぐさまで丁寧に残してもらい、家族にとって大切な写真になりました。" },
-    { image: "images/photos/kaseda008.webp", alt: "古民家で子どもを見守る着物姿の母親",
-      name: "I.family", published: true, order: 3,
-      text: "撮影中も子どものペースに合わせてもらえたので、最後まで楽しく過ごせました。\n仕上がった写真には、家族の自然な笑顔がたくさん写っていてうれしかったです。" },
-    { image: "images/photos/tutumi003.webp", alt: "ソファで双子の赤ちゃんを抱く母親と姉",
-      name: "W.family", published: true, order: 4,
-      text: "どんな写真を残したいかを丁寧に聞いてもらい、安心して撮影をお願いできました。\n自分たちでは気づかないような表情も残してもらえて、何度も見返しています。" },
-    { image: "images/photos/temazushi137.webp", alt: "白衣姿で仕事に向き合う職人のプロフィール写真",
-      name: "M様", published: true, order: 5,
-      text: "プロフィール写真をお願いしました。\n撮られることが苦手でしたが、自然な雰囲気を作ってもらい、自分らしい一枚に仕上がりました。" }
+    { image: "images/photos/voice-hirabe.webp", alt: "七五三撮影で笑顔を見せるお子さまの写真",
+      name: "平部さま", published: true, order: 1,
+      text: "今回、初めてご利用させて頂きました。\nまずは、お願いして良かったなと心から\n思いました。雰囲気作りから、場の和ませ\n方など、全部が本当に楽しかったです！\n\n人見知りな次女の心配をしていましたが\n親でも撮れない、自然な表情をたくさん\n撮って頂けました。\n\n数ヶ月たった今、見返しても\nそのときの思い出が蘇ってくる\nそんな素敵な写真ばかりです。\n\n一生に一度の素敵な記念になりました。\nありがとうございました(●´ω｀●)" },
+    { image: "images/photos/voice-nishiida.webp", alt: "プロフィール撮影で自然体の表情を残したお客様の写真",
+      name: "西井田さま", published: true, order: 2,
+      text: "写真撮影、初めての事でドキドキでしたが、撮られてることを忘れて自然体の写真を撮って頂きました😊\nなにより、カメラマンさんがとても素敵な方で穏やかな気持ちで撮影に臨むことができました🌿\n写真のデータも頂けて、終始とても親切に対応してもらえました😊おすすめです✨" },
+    { image: "images/photos/voice-iwakiri.webp", alt: "ハーフバースデー撮影の赤ちゃんの写真",
+      name: "岩切さま", published: true, order: 3,
+      text: "知人の紹介でお知り合いになり、マタニティフォト、息子のハーフバースデー写真、会社の写真を撮っていただきました。いつも明るくて素敵な方です。短時間で自然体な温かい写真をいつも撮っていただけるので今後ともお願いしたいです💜そして、気になる写真データの方も1週間以内にいつも送ってくださりとてもありがたいです！\n息子の1歳の誕生日フォトもよろしくお願いします💜" },
+    { image: "images/photos/voice-miyuki.webp", alt: "成人式撮影の記念写真",
+      name: "miyukiさま", published: true, order: 4,
+      text: "娘の成人祝いに撮影していただきました。\n写真はもちろん、ヒビノネさんの人柄も素敵で、緊張する事なく楽しい最高の撮影でした💕\n\n次も是非ヒビノネさんにお願いしたいです✨" },
+    { image: "images/photos/voice-sonoda.webp", alt: "卒業記念撮影で笑顔を見せる3人の写真", focus: "62% center",
+      name: "園田さま", published: true, order: 5,
+      text: "娘の卒業記念に写真を撮ってもらいました！\n撮ってる時のヒビノネさんは楽しそうで見てる私も楽しかったです^_^\n子ども達も良い笑顔の写真ばかりでした(^O^)\nまたお願いします♡" }
   ],
 
   /* ----------------------------------------------------------
@@ -766,7 +717,7 @@ const SITE_CONFIG = {
       a: "プロフィール撮影や短時間の記念撮影は、30分から1時間が目安です。\n家族撮影、七五三、複数の場所での撮影は、1時間から2時間がおすすめです。\nイベントや長時間の密着撮影は、2時間から3時間をご検討ください。\n内容が決まっていない場合は、ご相談内容に合わせてご提案します。" },
     { category: "納品", order: 6, published: true,
       q: "納品枚数は何枚ですか？",
-      a: "30分撮影の場合は、100枚前後が目安です。\n撮影時間、人数、撮影内容、当日の状況によって納品枚数は変わります。" },
+      a: "30分撮影の場合は、50枚前後が目安です。\n撮影時間、人数、撮影内容、当日の状況によって納品枚数は変わります。" },
     { category: "納品", order: 7, published: true,
       q: "写真はどのように納品されますか？",
       a: "一枚ずつ色味や明るさを整えたうえで、Googleフォトにて納品します。\nダウンロード方法についても、納品時にご案内します。" },
@@ -809,9 +760,9 @@ const SITE_CONFIG = {
      フォームの選択肢
   ---------------------------------------------------------- */
   formOptions: {
-    sceneTypes: ["日常撮影","イベント撮影","商品撮影","店舗撮影","取材撮影","幼稚園保育園撮影",
-                 "七五三・七草・成人式","入学卒業","記念日フォト","ブライダル撮影","ペット撮影",
-                 "プロフィール撮影","その他","まだ決まっていない"],
+    sceneTypes: ["日常撮影","商品メニュー撮影","店舗撮影","記念撮影","ペット撮影",
+                 "七五三・七草","成人式","入学卒業","ブライダル撮影","幼稚園保育園撮影",
+                 "その他","まだ決まっていない"],
     plans: ["データのみ","フォトブック＆データ","フォトパネル＆データ","相談して決めたい"],
     durations: ["30分","1時間","2時間","3時間","相談して決めたい"],
     locations: ["ロケーション撮影","ご自宅","スタジオ撮影","店舗","幼稚園、保育園","その他","まだ決まっていない"],
