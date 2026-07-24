@@ -542,7 +542,7 @@ const SITE_CONFIG = {
   ---------------------------------------------------------- */
   scenes: [
     { no: "01", en: "Daily",        ja: "日常撮影",
-      image: "images/scenes/daily/daily001.webp", alt: "日常撮影の作例写真",
+      image: "images/scenes/daily/daily-cover.webp", alt: "日常撮影の作例写真",
       desc: "何気ない日々の表情や、家族の自然な時間を残す撮影です。",
       gallery: Array.from({ length: 41 }, (_, i) =>
         `images/scenes/daily/daily${String(i + 1).padStart(3, "0")}.webp`) },
