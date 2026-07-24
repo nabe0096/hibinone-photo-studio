@@ -108,17 +108,12 @@
   $$(".reveal").forEach((n) => io.observe(n));
 
   /* ----------------------------------------------------------
-     無限ループカルーセル（自動再生＋ドラッグ＋ホイール＋スワイプ）
+     無限ループカルーセル（自動再生のみ）
   ---------------------------------------------------------- */
   function createMarquee(container, track, speed) {
     let offset = 0;
     let halfWidth = 0;
-    let dragging = false;
-    let startX = 0;
-    let startOffset = 0;
     let lastTime = null;
-    let idleTimer = null;
-    let paused = false;
 
     // 中身を複製してシームレスにループさせる
     function duplicate() {
@@ -159,57 +154,12 @@
       if (lastTime === null) lastTime = t;
       const dt = Math.min(t - lastTime, 100);
       lastTime = t;
-      if (!dragging && !paused && !reduceMotion) {
+      if (!reduceMotion) {
         offset += (speed * dt) / 1000;
         apply();
       }
       requestAnimationFrame(tick);
     }
-
-    function pauseBriefly() {
-      paused = true;
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => { paused = false; }, 1800);
-    }
-
-    // ドラッグ / スワイプ
-    container.addEventListener("pointerdown", (e) => {
-      dragging = true;
-      startX = e.clientX;
-      startOffset = offset;
-      container.classList.add("is-dragging");
-      container.setPointerCapture(e.pointerId);
-    });
-    container.addEventListener("pointermove", (e) => {
-      if (!dragging) return;
-      offset = startOffset - (e.clientX - startX);
-      apply();
-    });
-    function endDrag() {
-      if (!dragging) return;
-      dragging = false;
-      container.classList.remove("is-dragging");
-      pauseBriefly();
-    }
-    container.addEventListener("pointerup", endDrag);
-    container.addEventListener("pointercancel", endDrag);
-
-    // クリックとドラッグの区別（リンクを含む場合）
-    container.addEventListener("click", (e) => {
-      if (Math.abs(offset - startOffset) > 6 && e.target.closest("a")) {
-        e.preventDefault();
-      }
-    }, true);
-
-    // 横方向のホイール（トラックパッドの横スワイプ）で移動
-    // 縦スクロールには干渉しない
-    container.addEventListener("wheel", (e) => {
-      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
-      e.preventDefault();
-      offset += e.deltaX;
-      apply();
-      pauseBriefly();
-    }, { passive: false });
 
     duplicate();
     requestAnimationFrame(() => {

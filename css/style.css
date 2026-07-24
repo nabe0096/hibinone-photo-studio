@@ -353,12 +353,12 @@ button { font-family: inherit; cursor: pointer; }
   overflow: hidden;
   max-width: 100%;
   contain: paint;
-  cursor: grab;
+  pointer-events: none;
+  cursor: default;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-y;
+  touch-action: auto;
 }
-.marquee.is-dragging { cursor: grabbing; }
 .marquee__track {
   display: flex;
   align-items: center;
@@ -1354,9 +1354,7 @@ button { font-family: inherit; cursor: pointer; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s ease;
 }
-.insta-item:hover img { transform: scale(1.05); }
 
 .insta__foot { text-align: center; margin-top: clamp(44px, 6vw, 64px); }
 .insta__note {
