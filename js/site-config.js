@@ -31,7 +31,7 @@ const SITE_CONFIG = {
   form: {
     provider: "web3forms",
     endpoint: "https://api.web3forms.com/submit",
-    accessKey: "",            // ← ここにWeb3Formsのアクセスキーを貼る
+    accessKey: "af906dcd-7fca-41cb-b47a-44103063298a",            // ← ここにWeb3Formsのアクセスキーを貼る
     subjectPrefix: "【ヒビノネ写真館】"
   },
 
