@@ -111,19 +111,32 @@
     let idleTimer = null;
     let paused = false;
 
-    // 中身を2セットに複製してシームレスにループさせる
+    // 中身を複製してシームレスにループさせる
     function duplicate() {
       const items = Array.from(track.children);
-      items.forEach((it) => {
-        const clone = it.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        clone.querySelectorAll("a, button").forEach((a) => a.setAttribute("tabindex", "-1"));
-        track.appendChild(clone);
-      });
+      if (!items.length) return;
+
+      const appendSet = () => {
+        items.forEach((it) => {
+          const clone = it.cloneNode(true);
+          clone.setAttribute("aria-hidden", "true");
+          clone.querySelectorAll("a, button").forEach((a) => a.setAttribute("tabindex", "-1"));
+          track.appendChild(clone);
+        });
+      };
+
+      appendSet();
+      halfWidth = track.scrollWidth / 2;
+
+      let guard = 0;
+      while (track.scrollWidth < container.clientWidth * 3 && guard < 8) {
+        appendSet();
+        guard += 1;
+      }
     }
 
     function measure() {
-      halfWidth = track.scrollWidth / 2;
+      if (!halfWidth) halfWidth = track.scrollWidth / 2;
     }
 
     function apply() {
@@ -210,14 +223,24 @@
     small: "(max-width: 767px) 46vw, 25vw"
   };
   const firstLoads = [];
-  C.heroPhotos.forEach((p, i) => {
+  function shufflePhotos(list) {
+    return [...list]
+      .map((photo) => ({ photo, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ photo }) => photo);
+  }
+  const heroPhotos = Array.isArray(C.heroPool) && C.heroPool.length
+    ? shufflePhotos(C.heroPool).slice(0, Math.min(36, C.heroPool.length))
+    : C.heroPhotos;
+
+  heroPhotos.forEach((p, i) => {
     const item = el("div", `hero__item hero__item--${p.size}`);
     const img = el("img");
     const small = p.src.replace("images/photos/", "images/photos/900/");
-    img.srcset = `${small} 900w, ${p.src} 1600w`;
+    if (small !== p.src) img.srcset = `${small} 900w, ${p.src} 1600w`;
     img.sizes = HERO_SIZES[p.size] || HERO_SIZES.wide;
     img.src = p.src;
-    img.alt = p.alt;
+    img.alt = p.alt || "ヒビノネ写真館の撮影写真";
     img.decoding = "async";
     if (i < 4) {
       img.fetchPriority = "high";   // 最初に見える写真を優先して読み込む
