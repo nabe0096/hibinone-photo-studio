@@ -649,19 +649,19 @@ const SITE_CONFIG = {
   ---------------------------------------------------------- */
   voices: [
     { image: "images/photos/voice-hirabe.webp", alt: "七五三撮影で笑顔を見せるお子さまの写真",
-      name: "平部さま", published: true, order: 1,
+      name: "H様", published: true, order: 1,
       text: "今回、初めてご利用させて頂きました。\nまずは、お願いして良かったなと心から\n思いました。雰囲気作りから、場の和ませ\n方など、全部が本当に楽しかったです！\n\n人見知りな次女の心配をしていましたが\n親でも撮れない、自然な表情をたくさん\n撮って頂けました。\n\n数ヶ月たった今、見返しても\nそのときの思い出が蘇ってくる\nそんな素敵な写真ばかりです。\n\n一生に一度の素敵な記念になりました。\nありがとうございました(●´ω｀●)" },
     { image: "images/photos/voice-nishiida.webp", alt: "プロフィール撮影で自然体の表情を残したお客様の写真",
-      name: "西井田さま", published: true, order: 2,
+      name: "N様", published: true, order: 2,
       text: "写真撮影、初めての事でドキドキでしたが、撮られてることを忘れて自然体の写真を撮って頂きました😊\nなにより、カメラマンさんがとても素敵な方で穏やかな気持ちで撮影に臨むことができました🌿\n写真のデータも頂けて、終始とても親切に対応してもらえました😊おすすめです✨" },
     { image: "images/photos/voice-iwakiri.webp", alt: "ハーフバースデー撮影の赤ちゃんの写真",
-      name: "岩切さま", published: true, order: 3,
+      name: "I様", published: true, order: 3,
       text: "知人の紹介でお知り合いになり、マタニティフォト、息子のハーフバースデー写真、会社の写真を撮っていただきました。いつも明るくて素敵な方です。短時間で自然体な温かい写真をいつも撮っていただけるので今後ともお願いしたいです💜そして、気になる写真データの方も1週間以内にいつも送ってくださりとてもありがたいです！\n息子の1歳の誕生日フォトもよろしくお願いします💜" },
     { image: "images/photos/voice-miyuki.webp", alt: "成人式撮影の記念写真",
-      name: "miyukiさま", published: true, order: 4,
+      name: "M様", published: true, order: 4,
       text: "娘の成人祝いに撮影していただきました。\n写真はもちろん、ヒビノネさんの人柄も素敵で、緊張する事なく楽しい最高の撮影でした💕\n\n次も是非ヒビノネさんにお願いしたいです✨" },
     { image: "images/photos/voice-sonoda.webp", alt: "卒業記念撮影で笑顔を見せる3人の写真", focus: "62% center",
-      name: "園田さま", published: true, order: 5,
+      name: "S様", published: true, order: 5,
       text: "娘の卒業記念に写真を撮ってもらいました！\n撮ってる時のヒビノネさんは楽しそうで見てる私も楽しかったです^_^\n子ども達も良い笑顔の写真ばかりでした(^O^)\nまたお願いします♡" }
   ],
 
