@@ -263,7 +263,7 @@
   C.scenes.forEach((s, index) => {
     const li = el("li", "scene-card");
     const photo = s.image
-      ? `<img src="${esc(s.image)}" alt="${esc(s.alt)}" loading="lazy" width="900" height="900">`
+      ? `<img src="${esc(s.image)}" alt="${esc(s.alt)}" loading="lazy" width="900" height="900" style="${s.focus ? `object-position: ${esc(s.focus)}` : ``}">`
       : PLACEHOLDER_SVG;
     li.innerHTML = `
       <button type="button" class="scene-card__link" data-scene-index="${index}" aria-haspopup="dialog">

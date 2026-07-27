@@ -245,8 +245,7 @@ const SITE_CONFIG = {
     { src: "images/scenes/daily/daily037.webp", size: "wide" },
     { src: "images/scenes/daily/daily038.webp", size: "wide" },
     { src: "images/scenes/daily/daily039.webp", size: "wide" },
-    { src: "images/scenes/daily/daily040.webp", size: "wide" },
-    { src: "images/scenes/daily/daily041.webp", size: "wide" },
+
     { src: "images/scenes/memory/memory001.webp", size: "tall" },
     { src: "images/scenes/memory/memory002.webp", size: "tall" },
     { src: "images/scenes/memory/memory003.webp", size: "tall" },
@@ -537,59 +536,49 @@ const SITE_CONFIG = {
   ],
 
   /* ----------------------------------------------------------
-     Select Scene（撮影メニュー12種）
+     Select Scene（撮影メニュー）
      image を差し替えるだけで写真を変更できます
   ---------------------------------------------------------- */
   scenes: [
-    { no: "01", en: "Daily",        ja: "日常撮影",
-      image: "images/scenes/daily/daily-cover.webp", alt: "日常撮影の作例写真",
+    { no: "01", en: "Daily",        ja: "日常",
+      image: "images/scenes/daily/daily-cover.webp", alt: "日常の作例写真",
+      focus: "47% 50%",
       desc: "何気ない日々の表情や、家族の自然な時間を残す撮影です。",
-      gallery: Array.from({ length: 41 }, (_, i) =>
+      gallery: Array.from({ length: 39 }, (_, i) =>
         `images/scenes/daily/daily${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "02", en: "Food Menu",    ja: "商品メニュー撮影",
-      image: "images/scenes/product/product-cover.webp", alt: "商品メニュー撮影の作例写真",
+    { no: "02", en: "Food",         ja: "food",
+      image: "images/scenes/product/product-cover.webp", alt: "foodの作例写真",
       desc: "料理やメニュー、食材の魅力が伝わるように撮影します。",
-      gallery: Array.from({ length: 41 }, (_, i) =>
+      gallery: Array.from({ length: 52 }, (_, i) =>
         `images/scenes/product/product${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "03", en: "Store",        ja: "店舗撮影",
-      image: "images/scenes/store/store001.webp", alt: "店舗撮影の作例写真",
+    { no: "03", en: "Store & Business", ja: "店舗・事業所",
+      image: "images/scenes/store/store-cover.webp", alt: "店舗・事業所の作例写真",
       desc: "店舗の魅力が伝わる写真撮影に加えて、SNS用の撮影方法をレクチャーするプランもあります。",
       gallery: Array.from({ length: 39 }, (_, i) =>
         `images/scenes/store/store${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "04", en: "Memory",       ja: "記念撮影",
-      image: "images/scenes/memory/memory-cover.webp", alt: "記念撮影の作例写真",
-      desc: "誕生日や家族の節目を、あたたかな雰囲気で残します。",
-      gallery: Array.from({ length: 126 }, (_, i) =>
-        `images/scenes/memory/memory${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "05", en: "Pet",          ja: "ペット撮影",
-      image: "images/scenes/pet/pet-cover.webp", alt: "ペット撮影の作例写真",
-      desc: "大切な家族であるペットの自然な表情を撮影します。",
-      gallery: Array.from({ length: 32 }, (_, i) =>
-        `images/scenes/pet/pet${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "06", en: "Shichi-Go-San", ja: "七五三・七草",
-      image: "images/scenes/shichigosan/shichigosan-cover.webp", alt: "七五三・七草撮影の作例写真",
-      desc: "七五三や七草など、成長の節目を自然な空気感とともに残します。",
-      gallery: Array.from({ length: 40 }, (_, i) =>
-        `images/scenes/shichigosan/shichigosan${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "07", en: "Coming of Age", ja: "成人式",
-      image: "images/scenes/coming/coming-cover.webp", alt: "成人式撮影の作例写真",
-      desc: "振袖や袴姿の晴れの日を、自然な表情とともに残します。",
-      gallery: Array.from({ length: 17 }, (_, i) =>
-        `images/scenes/coming/coming${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "08", en: "School Life",  ja: "入学卒業",
-      image: "images/scenes/school/school-cover.webp", alt: "入学卒業撮影の作例写真",
+    { no: "04", en: "Kimono & Ceremony", ja: "成人式・七五三・和装",
+      image: "images/scenes/kimono/kimono-cover.webp", alt: "成人式・七五三・和装の作例写真",
+      desc: "成人式や七五三、七草、和装姿を、晴れの日の空気感とともに残します。",
+      gallery: Array.from({ length: 177 }, (_, i) =>
+        `images/scenes/kimono/kimono${String(i + 1).padStart(3, "0")}.webp`) },
+    { no: "05", en: "School Milestones", ja: "入学・卒業",
+      image: "images/scenes/school/school-cover.webp", alt: "入学・卒業の作例写真",
       desc: "成長の節目となる大切な瞬間を撮影します。",
-      gallery: Array.from({ length: 46 }, (_, i) =>
+      gallery: Array.from({ length: 43 }, (_, i) =>
         `images/scenes/school/school${String(i + 1).padStart(3, "0")}.webp`) },
-    { no: "09", en: "Bridal",       ja: "ブライダル撮影",
-      image: "images/photos/bridal-top.webp", alt: "光の入る室内で見つめ合う新郎新婦",
+    { no: "06", en: "Bridal",       ja: "ブライダル",
+      image: "images/scenes/bridal/bridal-cover.webp", alt: "光の入る室内で見つめ合う新郎新婦",
       desc: "前撮り、後撮り、ふたりらしい自然なブライダルフォトに対応します。",
-      gallery: Array.from({ length: 133 }, (_, i) => i + 1)
-        .filter((n) => ![22, 27, 58, 64, 71, 89].includes(n))
-        .map((n) => `images/scenes/bridal/bridal${String(n).padStart(3, "0")}.webp`) },
-    { no: "10", en: "Kindergarten", ja: "幼稚園保育園撮影",
+      gallery: Array.from({ length: 118 }, (_, i) =>
+        `images/scenes/bridal/bridal${String(i + 1).padStart(3, "0")}.webp`) },
+    { no: "07", en: "Kindergarten", ja: "幼稚園・保育園",
       image: "images/sq/koukun260228_061.webp", alt: "外遊びでボールを追いかける男の子",
-      desc: "園での自然な活動風景や行事を撮影します。" }
+      desc: "園での自然な活動風景や行事を撮影します。" },
+    { no: "08", en: "Events",       ja: "イベント等",
+      image: "images/scenes/event/event-cover.webp", alt: "イベント等の作例写真",
+      desc: "イベントや発表会、各種記録撮影などもご相談ください。",
+      gallery: Array.from({ length: 91 }, (_, i) =>
+        `images/scenes/event/event${String(i + 1).padStart(3, "0")}.webp`) }
   ],
 
   /* ----------------------------------------------------------
@@ -760,8 +749,8 @@ const SITE_CONFIG = {
      フォームの選択肢
   ---------------------------------------------------------- */
   formOptions: {
-    sceneTypes: ["日常撮影","商品メニュー撮影","店舗撮影","記念撮影","ペット撮影",
-                 "七五三・七草","成人式","入学卒業","ブライダル撮影","幼稚園保育園撮影",
+    sceneTypes: ["日常","food","店舗・事業所","成人式・七五三・和装",
+                 "入学・卒業","ブライダル","幼稚園・保育園","イベント等",
                  "その他","まだ決まっていない"],
     plans: ["データのみ","フォトブック＆データ","フォトパネル＆データ","相談して決めたい"],
     durations: ["30分","1時間","2時間","3時間","相談して決めたい"],
