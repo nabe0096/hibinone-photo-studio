@@ -654,7 +654,7 @@ const SITE_CONFIG = {
     { image: "images/photos/voice-nishiida.webp", alt: "プロフィール撮影で自然体の表情を残したお客様の写真",
       name: "N様", published: true, order: 2,
       text: "写真撮影、初めての事でドキドキでしたが、撮られてることを忘れて自然体の写真を撮って頂きました😊\nなにより、カメラマンさんがとても素敵な方で穏やかな気持ちで撮影に臨むことができました🌿\n写真のデータも頂けて、終始とても親切に対応してもらえました😊おすすめです✨" },
-    { image: "images/photos/voice-iwakiri.webp", alt: "ハーフバースデー撮影の赤ちゃんの写真",
+    { image: "images/photos/voice-iwakiri.webp", alt: "ハーフバースデー撮影の赤ちゃんの写真", focus: "82% center",
       name: "I様", published: true, order: 3,
       text: "知人の紹介でお知り合いになり、マタニティフォト、息子のハーフバースデー写真、会社の写真を撮っていただきました。いつも明るくて素敵な方です。短時間で自然体な温かい写真をいつも撮っていただけるので今後ともお願いしたいです💜そして、気になる写真データの方も1週間以内にいつも送ってくださりとてもありがたいです！\n息子の1歳の誕生日フォトもよろしくお願いします💜" },
     { image: "images/photos/voice-miyuki.webp", alt: "成人式撮影の記念写真",
@@ -672,16 +672,21 @@ const SITE_CONFIG = {
   instagramBackground: "images/photos/kawasaki015.webp",
 
   instagramPosts: [
-    { image: "images/sq/dsc07177.webp",        url: "", date: "", alt: "湯気の立つ蒸したてのとうもろこし",       published: true, order: 1 },
-    { image: "images/sq/morimocha051.webp",    url: "", date: "", alt: "黒い器に盛り付けた前菜の一皿",           published: true, order: 2 },
-    { image: "images/sq/tutumi180.webp",       url: "", date: "", alt: "青いおくるみに包まれて眠る赤ちゃん",     published: true, order: 3 },
-    { image: "images/sq/temazushi035.webp",    url: "", date: "", alt: "手まり寿司にたれをかける瞬間",           published: true, order: 4 },
-    { image: "images/sq/ooura043.webp",        url: "", date: "", alt: "廊下を歩く着物姿の子どもたち",           published: true, order: 5 },
-    { image: "images/sq/dsc09467.webp",        url: "", date: "", alt: "かまぼこを作る職人の手元",               published: true, order: 6 },
-    { image: "images/sq/koba266.webp",         url: "", date: "", alt: "青い絵皿に盛られたローストビーフ",       published: true, order: 7 },
-    { image: "images/sq/yamashita007.webp",    url: "", date: "", alt: "帽子を掲げる着物姿の男の子",             published: true, order: 8 },
-    { image: "images/sq/expand029.webp",       url: "", date: "", alt: "編み物をする手元のクローズアップ",       published: true, order: 9 },
-    { image: "images/sq/kawanohonoka030.webp", url: "", date: "", alt: "古民家の窓辺に座る着物姿のふたり",       published: true, order: 10 }
+    { image: "images/instagram/image001.jpg", url: "", date: "", alt: "Instagram掲載写真 1", published: true, order: 1 },
+    { image: "images/instagram/image002.jpg", url: "", date: "", alt: "Instagram掲載写真 2", published: true, order: 2 },
+    { image: "images/instagram/image003.jpg", url: "", date: "", alt: "Instagram掲載写真 3", published: true, order: 3 },
+    { image: "images/instagram/image004.jpg", url: "", date: "", alt: "Instagram掲載写真 4", published: true, order: 4 },
+    { image: "images/instagram/image005.jpg", url: "", date: "", alt: "Instagram掲載写真 5", published: true, order: 5 },
+    { image: "images/instagram/image006.jpg", url: "", date: "", alt: "Instagram掲載写真 6", published: true, order: 6 },
+    { image: "images/instagram/image007.jpg", url: "", date: "", alt: "Instagram掲載写真 7", published: true, order: 7 },
+    { image: "images/instagram/image008.jpg", url: "", date: "", alt: "Instagram掲載写真 8", published: true, order: 8 },
+    { image: "images/instagram/image009.jpg", url: "", date: "", alt: "Instagram掲載写真 9", published: true, order: 9 },
+    { image: "images/instagram/image010.jpg", url: "", date: "", alt: "Instagram掲載写真 10", published: true, order: 10 },
+    { image: "images/instagram/image011.jpg", url: "", date: "", alt: "Instagram掲載写真 11", published: true, order: 11 },
+    { image: "images/instagram/image012.jpg", url: "", date: "", alt: "Instagram掲載写真 12", published: true, order: 12 },
+    { image: "images/instagram/image013.jpg", url: "", date: "", alt: "Instagram掲載写真 13", published: true, order: 13 },
+    { image: "images/instagram/image014.jpg", url: "", date: "", alt: "Instagram掲載写真 14", published: true, order: 14 },
+    { image: "images/instagram/image015.jpg", url: "", date: "", alt: "Instagram掲載写真 15", published: true, order: 15 }
   ],
 
   /* ----------------------------------------------------------
