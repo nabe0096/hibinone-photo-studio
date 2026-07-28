@@ -1,0 +1,665 @@
+@import url("https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500&display=swap");
+
+/* ============================================================
+   ヒビノネ写真館 — gift.css
+   「写真の贈り物」ページ専用スタイル
+   ------------------------------------------------------------
+   ・style.css を読み込んだうえで追加で読み込みます
+   ・書体・色・余白はトップページと共通のものを使用しています
+   ・商品名「写真の贈り物」だけ、明朝体（Zen Old Mincho）で組みます
+   ============================================================ */
+
+:root {
+  --font-mincho: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+/* ------------------------------------------------------------
+   本文の文字サイズは「大」「小」の2種類だけを使う
+   （読みやすさを優先し、中間サイズは作らない）
+------------------------------------------------------------ */
+.page-gift {
+  --gift-lg: clamp(17px, 2.2vw, 22px);   /* 大：伝えたい一文 */
+  --gift-sm: clamp(13.5px, 1.7vw, 15px); /* 小：説明文・補足 */
+}
+
+/* 現在地のメニュー */
+.header__menu .is-current::after {
+  right: 0;
+}
+
+/* GIFTが増えた分、狭めのPC幅でメニューが窮屈にならないよう間隔を詰める */
+@media (min-width: 901px) and (max-width: 1080px) {
+  .header__menu { gap: 15px; }
+  .header__menu a { letter-spacing: 0.14em; }
+  .header__contact-link { padding: 8px 13px !important; }
+}
+
+/* ファーストビューの写真に重なる間だけ、ヘッダーを白文字にする
+   （スクロールして背景が白くなったら通常の黒文字へ戻る） */
+.page-gift .header:not(.is-solid) .header__brand-en,
+.page-gift .header:not(.is-solid) .header__menu a {
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(17, 17, 17, 0.4);
+}
+.page-gift .header:not(.is-solid) .header__menu a::after { background: #fff; }
+.page-gift .header:not(.is-solid) .header__contact-link {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.page-gift .header:not(.is-solid) .header__contact-link:hover {
+  background: #fff;
+  color: var(--black);
+  text-shadow: none;
+}
+.page-gift .header:not(.is-solid) .header__burger span { background: #fff; }
+@media (max-width: 900px) {
+  /* メニューを開いている間は白背景なので黒文字に戻す */
+  .page-gift .header:not(.is-solid) .header__nav.is-open .header__menu a {
+    color: var(--black);
+    text-shadow: none;
+  }
+  .page-gift .header__burger[aria-expanded="true"] span { background: var(--black) !important; }
+}
+
+/* ------------------------------------------------------------
+   見出しの英字を「丸を含めず」ページ中央に揃える
+   丸は文字の左側に、レイアウトに影響しない形で添える
+   （トップページ・贈り物ページ共通。左寄せ見出しは従来どおり）
+------------------------------------------------------------ */
+.section__head:not(.section__head--left) .section__label {
+  position: relative;
+  display: inline-block;
+  text-indent: 0.14em;   /* 字間の余り分を戻して、見た目の中心を合わせる */
+}
+.section__head:not(.section__head--left) .section__dot {
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .section__head:not(.section__head--left) .section__dot { left: -17px; }
+}
+
+/* アクセントの丸の色をページ内で意図的に配分する
+   （style.css 側の並び順による自動配色より優先させる） */
+.page-gift .section.gift-concept .section__dot { background: var(--soft-blue); }
+.page-gift .section.gift-scenes  .section__dot { background: var(--soft-yellow); }
+.page-gift .section.gift-flow    .section__dot { background: var(--soft-blue); }
+.page-gift .section.gift-plan    .section__dot { background: var(--soft-green); }
+.page-gift .section.gift-contact .section__dot { background: var(--soft-blue); }
+
+/* ============================================================
+   Hero
+============================================================ */
+.gift-hero {
+  position: relative;
+  height: 78svh;
+  max-height: 780px;
+  min-height: 500px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--black);
+}
+.gift-hero__media {
+  position: absolute;
+  inset: 0;
+}
+.gift-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: gift-hero-slide 15s linear infinite;
+}
+.gift-hero__slide--1 { animation-delay: 0s; }
+.gift-hero__slide--2 { animation-delay: 3s; }
+.gift-hero__slide--3 { animation-delay: 6s; }
+.gift-hero__slide--4 { animation-delay: 9s; }
+.gift-hero__slide--5 { animation-delay: 12s; }
+.gift-hero__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: scale(1.025);
+}
+@keyframes gift-hero-slide {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  20% { opacity: 1; }
+  24% { opacity: 0; }
+  100% { opacity: 0; }
+}
+/* 上はヘッダーの文字、下はキャッチコピーが読めるように暗く落とす */
+.gift-hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(17,17,17,0.42) 0%, rgba(17,17,17,0.10) 22%, rgba(17,17,17,0.06) 42%, rgba(17,17,17,0.62) 100%);
+}
+
+.gift-hero__copy {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 0 clamp(20px, 5vw, 64px) clamp(54px, 9vh, 96px);
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  animation: gift-copy-in 1.4s ease 0.7s forwards;
+}
+@keyframes gift-copy-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.gift-hero__en {
+  font-family: var(--font-en);
+  font-size: clamp(10.5px, 1.2vw, 13px);
+  letter-spacing: 0.52em;
+  text-indent: 0.52em;
+  color: rgba(255, 255, 255, 0.82);
+}
+.gift-hero__title {
+  font-family: var(--font-mincho);
+  font-weight: 400;
+  font-size: clamp(33px, 6.4vw, 66px);
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  line-height: 1.45;
+  margin-top: 2px;
+  text-shadow: 0 2px 44px rgba(17, 17, 17, 0.42);
+}
+/* 囲みは使わず、細い罫線で受ける */
+.gift-hero__tag {
+  display: block;
+  position: relative;
+  margin-top: clamp(28px, 4vw, 40px);
+  padding-top: clamp(24px, 3vw, 32px);
+  font-size: clamp(11.5px, 1.35vw, 13px);
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.9);
+}
+.gift-hero__tag::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+}
+.gift-hero .hero__scroll { color: rgba(255, 255, 255, 0.82); }
+.gift-hero .hero__scroll::after { background: #fff; opacity: 0.6; }
+
+@media (max-width: 767px) {
+  .gift-hero { height: 84svh; min-height: 480px; }
+  .gift-hero__slide img { object-position: center 38%; }
+}
+
+/* ============================================================
+   問いかけ
+============================================================ */
+.gift-ask { background: #fff; }
+.gift-ask__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 48px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: center;
+}
+.gift-ask__text {
+  font-size: var(--gift-sm);
+  line-height: 2.6;
+  color: var(--ink-soft);
+}
+.gift-ask__text p + p { margin-top: 1.7em; }
+.gift-ask__lead {
+  font-size: var(--gift-lg);
+  line-height: 2.1;
+  letter-spacing: 0.1em;
+  color: var(--black);
+  margin-bottom: 0.4em;
+}
+.gift-ask__close { color: var(--black); }
+.gift-ask__photo img {
+  width: 100%;
+  border-radius: 3px;
+}
+@media (max-width: 860px) {
+  .gift-ask__inner { grid-template-columns: 1fr; }
+  .gift-ask__photo { max-width: 380px; margin: 0 auto; }
+  .gift-ask__text { text-align: center; }
+}
+
+/* ============================================================
+   はじめた想い（写真の上に重ねる）
+============================================================ */
+.gift-begin { position: relative; }
+.gift-begin__photo img {
+  width: 100%;
+  height: clamp(280px, 46vw, 620px);
+  object-fit: cover;
+  object-position: center 46%;
+}
+.gift-begin__body {
+  background: var(--offwhite);
+  padding: clamp(60px, 9vw, 110px) clamp(20px, 5vw, 48px);
+}
+.gift-begin__text {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: var(--gift-sm);
+  line-height: 2.5;
+  color: var(--ink-soft);
+}
+.gift-begin__text p + p { margin-top: 1.8em; }
+.gift-begin__close {
+  color: var(--black);
+  font-size: var(--gift-lg);
+  line-height: 2.2;
+}
+.gift-begin__mark {
+  position: relative;
+  padding: 0 2px;
+  letter-spacing: 0.08em;
+  box-shadow: inset 0 -0.5em 0 var(--soft-blue);
+}
+
+/* ============================================================
+   写真の贈り物とは
+============================================================ */
+.gift-concept { background: #fff; padding-bottom: 0; }
+.gift-concept__body { text-align: center; }
+.gift-concept__lead {
+  font-size: var(--gift-lg);
+  line-height: 2.1;
+  letter-spacing: 0.1em;
+}
+.gift-concept__sub {
+  font-size: var(--gift-sm);
+  letter-spacing: 0.12em;
+  margin-top: 20px;
+  color: var(--ink-soft);
+}
+.gift-concept__note {
+  margin-top: clamp(38px, 5vw, 54px);
+  padding-top: clamp(34px, 4.5vw, 46px);
+  border-top: 1px solid var(--lightgray);
+  font-size: var(--gift-sm);
+  line-height: 2.4;
+  color: var(--ink-soft);
+}
+.gift-concept__strong {
+  color: var(--black);
+  font-size: var(--gift-lg);
+  line-height: 2.1;
+  margin-top: 1.1em;
+  letter-spacing: 0.1em;
+}
+.gift-concept__photo {
+  max-width: 1024px;
+  margin: clamp(46px, 7vw, 78px) auto 0;
+  padding: 0 clamp(20px, 5vw, 48px);
+  transform: translateY(clamp(40px, 6vw, 70px));
+}
+.gift-concept__photo img { width: 100%; border-radius: 3px; }
+
+/* ============================================================
+   贈るシーン
+============================================================ */
+.gift-scenes {
+  background: var(--offwhite);
+  padding-top: clamp(130px, 18vw, 220px);
+}
+.gift-scene__list {
+  display: grid;
+  gap: clamp(72px, 10vw, 130px);
+}
+.gift-scene { display: block; }
+
+.gift-scene__photo {
+  max-width: 920px;
+  margin: clamp(26px, 3.6vw, 40px) auto 0;
+}
+.gift-scene__photo--portrait { max-width: 560px; }
+.gift-scene__photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+.gift-scene__body { text-align: center; }
+.gift-scene__no {
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--ink-soft);
+  display: inline-block;
+  padding-bottom: 4px;
+  position: relative;
+}
+.gift-scene__no::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+}
+.gift-scene:nth-child(4n+1) .gift-scene__no::after { background: var(--soft-blue); }
+.gift-scene:nth-child(4n+2) .gift-scene__no::after { background: var(--soft-yellow); }
+.gift-scene:nth-child(4n+3) .gift-scene__no::after { background: var(--soft-green); }
+.gift-scene:nth-child(4n)   .gift-scene__no::after { background: var(--soft-blue); }
+
+.gift-scene__title {
+  font-size: clamp(18px, 2.4vw, 23px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.8;
+  margin-top: 16px;
+}
+.gift-scene__lead {
+  font-size: var(--gift-sm);
+  color: var(--ink-soft);
+  line-height: 2.1;
+  margin-top: 14px;
+}
+@media (max-width: 767px) {
+  .gift-scene__photo--portrait { max-width: 78%; }
+}
+
+/* ============================================================
+   贈り方（Flow）
+============================================================ */
+.gift-flow { background: var(--lightgray); }
+.gift-flow__list {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: clamp(28px, 5vw, 56px) clamp(22px, 4.5vw, 60px);
+}
+.gift-flow__item {
+  display: grid;
+  grid-template-columns: clamp(52px, 7vw, 84px) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: start;
+  padding: clamp(22px, 3.4vw, 34px) 0;
+}
+.gift-flow__item + .gift-flow__item {
+  border-top: 1px dashed var(--line);
+}
+.gift-flow__no {
+  font-family: var(--font-en);
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1;
+  color: var(--black);
+  letter-spacing: 0.02em;
+}
+.gift-flow__title {
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+.gift-flow__text {
+  margin-top: 10px;
+  font-size: var(--gift-sm);
+  line-height: 2.1;
+  color: var(--ink-soft);
+}
+.gift-flow__note {
+  display: block;
+  margin-top: 6px;
+  font-size: var(--gift-sm);
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   撮影プラン
+============================================================ */
+.gift-plan { background: #fff; }
+.gift-plan__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: stretch;
+}
+@media (max-width: 860px) {
+  .gift-plan__list { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+}
+.gift-plan__card {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: clamp(28px, 3.4vw, 42px) clamp(22px, 2.6vw, 32px);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background: var(--offwhite);
+}
+.gift-plan__no {
+  font-family: var(--font-en);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink-soft);
+  padding-bottom: 12px;
+  position: relative;
+}
+.gift-plan__no::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 2px;
+  border-radius: 2px;
+}
+.gift-plan__card:nth-child(1) .gift-plan__no::after { background: var(--soft-blue); }
+.gift-plan__card:nth-child(2) .gift-plan__no::after { background: var(--soft-yellow); }
+.gift-plan__card:nth-child(3) .gift-plan__no::after { background: var(--soft-green); }
+
+.gift-plan__name {
+  font-size: 15.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  margin-top: 16px;
+  line-height: 1.7;
+}
+.gift-plan__price {
+  font-family: var(--font-en);
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  margin-top: 10px;
+}
+.gift-plan__price small {
+  font-family: var(--font-ja);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-left: 2px;
+  color: var(--ink-soft);
+}
+.gift-plan__desc {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--lightgray);
+  font-size: var(--gift-sm);
+  line-height: 2.05;
+  color: var(--ink-soft);
+  text-align: left;
+  flex: 1;
+}
+.gift-plan__desc p + p { margin-top: 0.5em; }
+.gift-plan__include {
+  margin-top: 16px;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  color: var(--black);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  align-self: center;
+}
+
+.gift-plan__notes {
+  margin-top: clamp(34px, 5vw, 50px);
+  padding: 26px clamp(20px, 3vw, 40px);
+  background: var(--lightgray);
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 2.15;
+}
+
+/* ============================================================
+   Contact（贈り物ページ用の追加分）
+============================================================ */
+.gift-contact__dm {
+  text-align: center;
+  margin-bottom: clamp(38px, 5vw, 56px);
+}
+.gift-contact__dm-text {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.gift-contact__dm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 300px;
+}
+.gift-contact__dm-btn svg { width: 19px; height: 19px; flex-shrink: 0; }
+.gift-contact__dm-or {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: clamp(30px, 4vw, 42px);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+}
+.gift-contact__dm-or::before,
+.gift-contact__dm-or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ============================================================
+   トップページへ戻る
+============================================================ */
+.gift-back {
+  background: var(--offwhite);
+  padding: clamp(64px, 9vw, 110px) 0;
+  text-align: center;
+  border-top: 1px solid var(--lightgray);
+}
+.gift-back__text {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-bottom: 26px;
+  line-height: 2.1;
+}
+
+/* ============================================================
+   トップページに置く「写真の贈り物」への入口
+   （index.html でも gift.css を読み込んでいます）
+============================================================ */
+.gift-teaser { background: var(--offwhite); }
+.gift-teaser__link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.gift-teaser__media { position: absolute; inset: 0; }
+.gift-teaser__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  transition: transform 1.2s ease;
+}
+.gift-teaser__link:hover .gift-teaser__media img { transform: scale(1.03); }
+.gift-teaser__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(17,17,17,0.38) 0%, rgba(17,17,17,0.54) 55%, rgba(17,17,17,0.64) 100%);
+}
+.gift-teaser__body {
+  position: relative;
+  z-index: 2;
+  min-height: clamp(340px, 44vw, 520px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(56px, 8vw, 90px) clamp(20px, 5vw, 48px);
+  color: #fff;
+}
+.gift-teaser__en {
+  font-family: var(--font-en);
+  font-size: clamp(10.5px, 1.2vw, 13px);
+  letter-spacing: 0.52em;
+  text-indent: 0.52em;
+  color: rgba(255, 255, 255, 0.82);
+}
+.gift-teaser__title {
+  font-family: var(--font-mincho);
+  font-size: clamp(25px, 4vw, 42px);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  line-height: 1.45;
+  margin-top: 2px;
+  text-shadow: 0 2px 34px rgba(17, 17, 17, 0.42);
+}
+.gift-teaser__lead {
+  margin-top: 22px;
+  font-size: clamp(12.5px, 1.6vw, 14px);
+  line-height: 2.2;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.94);
+}
+.gift-teaser__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  margin-top: clamp(28px, 4vw, 40px);
+  padding: 0.95em 2.2em;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 3px;
+  font-family: var(--font-en);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+.gift-teaser__link:hover .gift-teaser__btn {
+  background: #fff;
+  color: var(--black);
+}
+
+/* ============================================================
+   Reduced motion
+============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .gift-hero__slide,
+  .gift-hero__copy {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .gift-hero__slide:not(:first-child) { display: none; }
+}
