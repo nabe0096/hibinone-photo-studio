@@ -872,7 +872,8 @@ button { font-family: inherit; cursor: pointer; }
   margin: clamp(34px, 5vw, 54px) 0 0 auto;
   padding: 0 6px 10px;
   position: relative;
-  font-family: "HanziPen SC", "Tsukushi A Round Gothic", "YuKyokasho", "Yu Mincho", cursive;
+  /* Webフォント配信のため、どの端末でも同じ字で表示されます */
+  font-family: "Klee One", "Hiragino Mincho ProN", "Yu Mincho", serif;
   font-size: clamp(22px, 2.3vw, 34px);
   font-weight: 400;
   line-height: 1.35;
@@ -892,8 +893,8 @@ button { font-family: inherit; cursor: pointer; }
 .about__signature span {
   display: inline-block;
   margin-left: 0.18em;
-  font-family: "Snell Roundhand", "Bradley Hand", "HanziPen SC", cursive;
-  font-size: 0.82em;
+  font-family: "Parisienne", "Snell Roundhand", cursive;
+  font-size: 0.9em;
   letter-spacing: 0.04em;
   color: rgba(74, 74, 72, 0.78);
   transform: translateY(0.08em);
