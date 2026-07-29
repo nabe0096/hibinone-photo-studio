@@ -593,18 +593,18 @@ const SITE_CONFIG = {
       image: { src: "images/plans/data-plan.png", alt: "写真データ納品をイメージしたタブレットと画像ファイルのビジュアル" }
     },
     {
-      en: "PHOTO BOOK PLAN", ja: "フォトブック＆データプラン", recommended: true,
-      copy: ["写真を、家族の時間として残す。", "スマートフォンの中だけではなく、10年後も手に取って見返せる一冊に。"],
-      desc: ["撮影データに加えて、思い出を一冊のフォトブックとして残すプランです。",
-             "家族で何度も見返せる形にしたい方におすすめです。"],
-      image: { src: "images/plans/photobook-plan.png", alt: "フォトブックと画像データをイメージしたビジュアル" }
-    },
-    {
       en: "PHOTO PANEL PLAN", ja: "フォトパネル＆データプラン", recommended: false,
       copy: ["思い出を、暮らしの中へ。", "お気に入りの一枚を、毎日目に入る場所に残します。"],
       desc: ["撮影データに加えて、お気に入りの一枚をフォトパネルとして残すプランです。",
              "家の中に飾り、日常の中で写真を楽しみたい方におすすめです。"],
       image: { src: "images/plans/photopanel-plan.png", alt: "室内に飾るフォトパネルと画像データをイメージしたビジュアル" }
+    },
+    {
+      en: "PHOTO BOOK PLAN", ja: "フォトブック＆データプラン", recommended: true,
+      copy: ["写真を、家族の時間として残す。", "スマートフォンの中だけではなく、10年後も手に取って見返せる一冊に。"],
+      desc: ["撮影データに加えて、思い出を一冊のフォトブックとして残すプランです。",
+             "家族で何度も見返せる形にしたい方におすすめです。"],
+      image: { src: "images/plans/photobook-plan.png", alt: "フォトブックと画像データをイメージしたビジュアル" }
     }
   ],
 
