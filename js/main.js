@@ -195,8 +195,9 @@
   heroPhotos.forEach((p, i) => {
     const item = el("div", `hero__item hero__item--${p.size}`);
     const img = el("img");
-    const small = p.src.replace("images/photos/", "images/photos/900/");
-    if (small !== p.src) img.srcset = `${small} 900w, ${p.src} 1600w`;
+    // 同じフォルダの「900」に軽量版があれば、画面サイズに応じて使い分ける
+    const small = p.src.replace(/([^/]+)$/, "900/$1");
+    img.srcset = `${small} 900w, ${p.src} 1400w`;
     img.sizes = HERO_SIZES[p.size] || HERO_SIZES.wide;
     img.src = p.src;
     img.alt = p.alt || "ヒビノネ写真館の撮影写真";
@@ -233,8 +234,10 @@
   const portraitFlowTrack = $("#portrait-flow-track");
   if (portraitFlow && portraitFlowTrack) {
     const flowSizes = ["wide", "tall", "small", "wide", "small", "tall"];
-    const flowPhotos = (Array.isArray(C.heroPool) && C.heroPool.length)
-      ? shufflePhotos(C.heroPool).slice(0, Math.min(30, C.heroPool.length))
+    // ファーストビューとは別のリスト（flowPool）を使う
+    const flowSource = (Array.isArray(C.flowPool) && C.flowPool.length) ? C.flowPool : C.heroPool;
+    const flowPhotos = (Array.isArray(flowSource) && flowSource.length)
+      ? shufflePhotos(flowSource).slice(0, Math.min(30, flowSource.length))
       : [];
 
     flowPhotos.forEach((p, i) => {

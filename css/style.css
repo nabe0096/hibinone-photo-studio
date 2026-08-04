@@ -56,6 +56,10 @@ button { font-family: inherit; cursor: pointer; }
 .sp-only { display: none; }
 @media (max-width: 767px) { .sp-only { display: inline; } }
 
+/* スマホでは改行させず、文章を続けて表示する */
+.pc-only { display: inline; }
+@media (max-width: 767px) { .pc-only { display: none; } }
+
 :focus-visible {
   outline: 2px solid var(--black);
   outline-offset: 3px;
