@@ -629,7 +629,7 @@ const SITE_CONFIG = {
     { no: "02", en: "Food",         ja: "food",
       image: "images/scenes/product/product-cover.webp", alt: "foodの作例写真",
       desc: "料理やメニュー、食材の魅力が伝わるように撮影します。",
-      gallery: Array.from({ length: 52 }, (_, i) =>
+      gallery: Array.from({ length: 62 }, (_, i) =>
         `images/scenes/product/product${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "03", en: "Store & Business", ja: "店舗・事業所",
       image: "images/scenes/store/store-cover.webp", alt: "店舗・事業所の作例写真",
