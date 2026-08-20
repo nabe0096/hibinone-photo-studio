@@ -639,7 +639,7 @@ const SITE_CONFIG = {
     { no: "04", en: "Kimono & Ceremony", ja: "成人式・七五三・和装",
       image: "images/scenes/kimono/kimono-cover.webp", alt: "成人式・七五三・和装の作例写真",
       desc: "成人式や七五三、七草、和装姿を、晴れの日の空気感とともに残します。",
-      gallery: Array.from({ length: 177 }, (_, i) =>
+      gallery: Array.from({ length: 277 }, (_, i) =>
         `images/scenes/kimono/kimono${String(i + 1).padStart(3, "0")}.webp`) },
     { no: "05", en: "School Milestones", ja: "入学・卒業",
       image: "images/scenes/school/school-cover.webp", alt: "入学・卒業の作例写真",
