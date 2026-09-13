@@ -770,103 +770,79 @@ button { font-family: inherit; cursor: pointer; }
   box-shadow: 0 0 0 2px var(--black), 0 10px 26px rgba(17, 17, 17, 0.16);
 }
 
-/* 拡大表示 */
-.scene-modal__figure {
-  flex: 1 1 auto;
-  min-height: 0;
+/* 拡大表示：画面全体を暗くして写真だけを大きく見せる（一覧の上に重ねる） */
+.scene-modal__lightbox {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 0;
-  position: relative;
-}
-.scene-modal[data-view="single"] .scene-modal__grid,
-.scene-modal[data-view="single"] .scene-modal__placeholder { display: none; }
-.scene-modal[data-view="single"] .scene-modal__figure { display: flex; }
-
-.scene-modal__zoom {
-  appearance: none;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: zoom-out;
-  min-height: 0;
-  display: grid;
   place-items: center;
+  padding: 16px;
+  background: rgba(10, 10, 10, 0.94);
+  cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 0.22s ease;
 }
+.scene-modal[data-view="single"] .scene-modal__lightbox {
+  display: grid;
+  opacity: 1;
+}
+/* 拡大中は下の一覧を消す（透けて見えると写真の邪魔になる。位置は保持されるので戻ると同じ場所） */
+.scene-modal[data-view="single"] .scene-modal__panel { visibility: hidden; }
 .scene-modal__img {
   max-width: 100%;
-  max-height: min(680px, 60svh);
+  max-height: calc(100svh - 32px);
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 3px;
-  box-shadow: 0 22px 70px rgba(17, 17, 17, 0.18);
+  cursor: default;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
   opacity: 0;
-  transform: scale(0.96);
+  transform: scale(0.97);
   transition: opacity 0.18s ease, transform 0.36s cubic-bezier(0.18, 1.2, 0.28, 1);
 }
-.scene-modal__img.is-from-prev { transform: translateX(-24px) scale(0.96); }
-.scene-modal__img.is-from-next { transform: translateX(24px) scale(0.96); }
+.scene-modal__img.is-from-prev { transform: translateX(-24px) scale(0.97); }
+.scene-modal__img.is-from-next { transform: translateX(24px) scale(0.97); }
 .scene-modal__img.is-visible {
   opacity: 1;
   transform: translateX(0) scale(1);
 }
-
-/* 「一覧へ戻る」 */
-.scene-modal__back {
-  align-self: flex-start;
+/* 左右の矢印は画面の端・写真の真ん中の高さに固定 */
+.scene-modal__lightbox .scene-modal__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(0, 0, 0, 0.38);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+.scene-modal__lightbox .scene-modal__nav:hover {
+  transform: translateY(-50%) scale(1.06);
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.scene-modal__lightbox .scene-modal__nav svg { stroke-width: 2; }
+.scene-modal__nav--prev { left: clamp(10px, 2.4vw, 32px); }
+.scene-modal__nav--next { right: clamp(10px, 2.4vw, 32px); }
+.scene-modal__lightbox-close {
+  position: absolute;
+  top: clamp(10px, 2vw, 22px);
+  right: clamp(10px, 2.4vw, 32px);
+  width: 44px;
+  height: 44px;
   appearance: none;
-  border: 1px solid rgba(17, 17, 17, 0.18);
-  background: rgba(255, 255, 255, 0.82);
-  color: var(--black);
-  border-radius: 999px;
-  padding: 8px 16px 8px 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-ja);
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 200;
+  line-height: 1;
   cursor: pointer;
-  box-shadow: 0 10px 26px rgba(17, 17, 17, 0.08);
-  transition: background-color 0.25s ease, border-color 0.25s ease;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
 }
-.scene-modal__back:hover {
-  background: #fff;
-  border-color: rgba(17, 17, 17, 0.3);
-}
-.scene-modal__back svg {
-  width: 15px;
-  height: 15px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linejoin: round;
-}
-
-.scene-modal__controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-}
-.scene-modal__pos {
-  min-width: 78px;
-  text-align: center;
-  font-family: var(--font-en);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  color: var(--ink-soft);
-}
-.scene-modal__hint {
-  margin: 0;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: rgba(17, 17, 17, 0.45);
-}
+.scene-modal__lightbox-close:hover { opacity: 1; }
 
 /* 準備中（写真が0枚のカテゴリ） */
 .scene-modal__placeholder {
@@ -950,9 +926,12 @@ button { font-family: inherit; cursor: pointer; }
     gap: 5px;
     padding: 2px 2px 22px;
   }
-  .scene-modal__img { max-height: 58svh; }
-  /* スマホは拡大表示を上寄せにして、見出しとの間に空白を作らない */
-  .scene-modal__figure { justify-content: flex-start; padding-top: 4px; }
+  /* スマホは写真を画面いっぱいに。矢印は写真に重ねて端に置く */
+  .scene-modal__lightbox { padding: 0; }
+  .scene-modal__img { max-height: 100svh; box-shadow: none; }
+  .scene-modal__nav--prev { left: 6px; }
+  .scene-modal__nav--next { right: 6px; }
+  .scene-modal__lightbox-close { top: 6px; right: 6px; }
   .scene-modal__placeholder-en { font-size: clamp(20px, 8vw, 34px); }
   .scene-modal__placeholder-ja { font-size: 12px; }
   .scene-modal__desc { font-size: 11.5px; }
@@ -965,8 +944,6 @@ button { font-family: inherit; cursor: pointer; }
     width: 40px;
     height: 40px;
   }
-  .scene-modal__controls { gap: 18px; }
-  .scene-modal__back { font-size: 11.5px; padding: 7px 14px 7px 11px; }
 }
 
 /* ============================================================

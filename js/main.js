@@ -301,41 +301,32 @@
         <span class="scene-modal__placeholder-en">Preparing</span>
         <span class="scene-modal__placeholder-ja">写真は準備中です</span>
       </div>
+    </div>
 
-      <figure class="scene-modal__figure">
-        <button type="button" class="scene-modal__back" aria-label="一覧に戻る">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 3.5h7v7h-7zM13.5 3.5h7v7h-7zM3.5 13.5h7v7h-7zM13.5 13.5h7v7h-7z"/></svg>
-          <span>一覧へ戻る</span>
-        </button>
-        <button type="button" class="scene-modal__zoom" aria-label="タップで一覧に戻る">
-          <img class="scene-modal__img" src="" alt="">
-        </button>
-        <div class="scene-modal__controls" aria-label="写真送り">
-          <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
-          </button>
-          <span class="scene-modal__pos"></span>
-          <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-        <p class="scene-modal__hint">写真をタップすると一覧に戻ります</p>
-      </figure>
+    <!-- 拡大表示：画面全体を暗くして写真だけを大きく。写真以外を押すと一覧へ戻る -->
+    <div class="scene-modal__lightbox" aria-label="写真の拡大表示">
+      <img class="scene-modal__img" src="" alt="">
+      <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+      </button>
+      <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
+      <button type="button" class="scene-modal__lightbox-close" aria-label="一覧に戻る">×</button>
     </div>
   `;
   document.body.appendChild(sceneModal);
 
   const modalGrid        = $(".scene-modal__grid", sceneModal);
   const modalImg         = $(".scene-modal__img", sceneModal);
-  const modalZoom        = $(".scene-modal__zoom", sceneModal);
+  const lightbox         = $(".scene-modal__lightbox", sceneModal);
   const modalPlaceholder = $(".scene-modal__placeholder", sceneModal);
   const modalTitle       = $(".scene-modal__title", sceneModal);
   const modalCount       = $(".scene-modal__count", sceneModal);
   const modalDesc        = $(".scene-modal__desc", sceneModal);
-  const modalPos         = $(".scene-modal__pos", sceneModal);
   const prevBtn  = $(".scene-modal__nav--prev", sceneModal);
   const nextBtn  = $(".scene-modal__nav--next", sceneModal);
-  const backBtn  = $(".scene-modal__back", sceneModal);
+  const lightboxCloseBtn = $(".scene-modal__lightbox-close", sceneModal);
   const closeBtn = $(".scene-modal__close", sceneModal);
   let activeGallery = [];
   let activeScene = null;
@@ -384,7 +375,15 @@
     modalGrid.appendChild(frag);
   }
 
-  /* 拡大表示の1枚を描く */
+  /* 拡大表示の1枚を描く（前後の1枚ずつは先に読み込んでおき、矢印を押した瞬間に出す） */
+  function preloadNeighbors() {
+    const n = activeGallery.length;
+    if (n < 2) return;
+    [activePhoto + 1, activePhoto - 1].forEach((i) => {
+      const img = new Image();
+      img.src = activeGallery[(i + n) % n];
+    });
+  }
   function renderScenePhoto(direction) {
     if (!activeScene || !activeGallery.length) return;
     const src = activeGallery[activePhoto];
@@ -392,10 +391,10 @@
     modalImg.classList.add(direction === "prev" ? "is-from-prev" : "is-from-next");
     window.setTimeout(() => {
       modalImg.src = src;
-      modalImg.alt = `${activeScene.ja} ${activePhoto + 1}`;
-      modalPos.textContent = `${activePhoto + 1} / ${activeGallery.length}`;
+      modalImg.alt = `${activeScene.ja} ${activePhoto + 1} / ${activeGallery.length}`;
       prevBtn.hidden = activeGallery.length < 2;
       nextBtn.hidden = activeGallery.length < 2;
+      preloadNeighbors();
     }, 60);
   }
   modalImg.addEventListener("load", () => modalImg.classList.add("is-visible"));
@@ -404,7 +403,7 @@
     activePhoto = index;
     setView("single");
     renderScenePhoto(direction);
-    backBtn.focus({ preventScroll: true });
+    nextBtn.focus({ preventScroll: true });
   }
 
   /* 拡大 → 一覧へ戻る（見ていた写真の位置までスクロールして目印を付ける） */
@@ -456,10 +455,22 @@
     const t = e.target.closest(".scene-modal__thumb");
     if (t) showPhoto(Number(t.dataset.index));
   });
-  modalZoom.addEventListener("click", backToGrid);   // 拡大写真をタップ → 一覧へ
-  backBtn.addEventListener("click", backToGrid);
+  // 拡大表示：写真・矢印以外の場所（暗い背景）を押すと一覧へ戻る
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) backToGrid();
+  });
+  lightboxCloseBtn.addEventListener("click", backToGrid);
   prevBtn.addEventListener("click", () => moveScenePhoto(-1));
   nextBtn.addEventListener("click", () => moveScenePhoto(1));
+  // スマホは左右にスワイプでも送れる
+  let swipeX = null;
+  lightbox.addEventListener("touchstart", (e) => { swipeX = e.changedTouches[0].clientX; }, { passive: true });
+  lightbox.addEventListener("touchend", (e) => {
+    if (swipeX === null) return;
+    const dx = e.changedTouches[0].clientX - swipeX;
+    swipeX = null;
+    if (Math.abs(dx) > 48) moveScenePhoto(dx < 0 ? 1 : -1);
+  }, { passive: true });
   closeBtn.addEventListener("click", closeSceneGallery);
   sceneModal.addEventListener("click", (e) => {
     if (e.target === sceneModal) closeSceneGallery();
