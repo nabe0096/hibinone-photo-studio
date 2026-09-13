@@ -387,26 +387,43 @@
       img.src = activeGallery[(i + n) % n];
     });
   }
+  /* 写真の出し方：一覧で読み込み済みの小さなサムネイルを、ぼかして先に大きく出す →
+     本物の写真が届いたらピントが合うように切り替わる（ボワン、と浮かび上がる見せ方） */
+  let renderToken = 0;
   function renderScenePhoto(direction) {
     if (!activeScene || !activeGallery.length) return;
     const src = activeGallery[activePhoto];
+    const token = ++renderToken;
     modalImg.classList.remove("is-visible", "is-from-prev", "is-from-next");
     modalImg.classList.add(direction === "prev" ? "is-from-prev" : "is-from-next");
     window.setTimeout(() => {
-      modalImg.src = src;
+      if (token !== renderToken) return;
+      modalImg.classList.add("is-blurred");
+      modalImg.src = thumbOf(src);       // まずサムネイル（即表示）
       modalImg.alt = `${activeScene.ja} ${activePhoto + 1} / ${activeGallery.length}`;
       prevBtn.hidden = activeGallery.length < 2;
       nextBtn.hidden = activeGallery.length < 2;
-      preloadNeighbors();
+
+      const full = new Image();
+      full.src = src;
+      const ready = full.decode ? full.decode().catch(() => {}) : Promise.resolve();
+      ready.then(() => {
+        if (token !== renderToken) return;   // その間に別の写真へ進んでいたら捨てる
+        modalImg.src = src;                  // 本物に差し替え → ぼかしが解けて矢印が出る
+        modalImg.classList.remove("is-blurred");
+        lightbox.classList.add("is-ready");
+        preloadNeighbors();
+      });
     }, 60);
   }
   modalImg.addEventListener("load", () => modalImg.classList.add("is-visible"));
 
   function showPhoto(index, direction = "next") {
     activePhoto = index;
+    lightbox.classList.remove("is-ready");   // 写真が出るまで矢印は出さない
     setView("single");
     renderScenePhoto(direction);
-    nextBtn.focus({ preventScroll: true });
+    lightboxCloseBtn.focus({ preventScroll: true });
   }
 
   /* 拡大 → 一覧へ戻る（見ていた写真の位置までスクロールして目印を付ける） */
