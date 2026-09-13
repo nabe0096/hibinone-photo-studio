@@ -387,8 +387,7 @@
       img.src = activeGallery[(i + n) % n];
     });
   }
-  /* 写真の出し方：一覧で読み込み済みの小さなサムネイルを、ぼかして先に大きく出す →
-     本物の写真が届いたらピントが合うように切り替わる（ボワン、と浮かび上がる見せ方） */
+  /* 写真の出し方：写真を先に読み込み終えてから、写真と左右ボタンを同時に出す */
   let renderToken = 0;
   function renderScenePhoto(direction) {
     if (!activeScene || !activeGallery.length) return;
@@ -396,27 +395,21 @@
     const token = ++renderToken;
     modalImg.classList.remove("is-visible", "is-from-prev", "is-from-next");
     modalImg.classList.add(direction === "prev" ? "is-from-prev" : "is-from-next");
-    window.setTimeout(() => {
-      if (token !== renderToken) return;
-      modalImg.classList.add("is-blurred");
-      modalImg.src = thumbOf(src);       // まずサムネイル（即表示）
-      modalImg.alt = `${activeScene.ja} ${activePhoto + 1} / ${activeGallery.length}`;
-      prevBtn.hidden = activeGallery.length < 2;
-      nextBtn.hidden = activeGallery.length < 2;
+    prevBtn.hidden = activeGallery.length < 2;
+    nextBtn.hidden = activeGallery.length < 2;
 
-      const full = new Image();
-      full.src = src;
-      const ready = full.decode ? full.decode().catch(() => {}) : Promise.resolve();
-      ready.then(() => {
-        if (token !== renderToken) return;   // その間に別の写真へ進んでいたら捨てる
-        modalImg.src = src;                  // 本物に差し替え → ぼかしが解けて矢印が出る
-        modalImg.classList.remove("is-blurred");
-        lightbox.classList.add("is-ready");
-        preloadNeighbors();
-      });
-    }, 60);
+    const full = new Image();
+    full.src = src;
+    const ready = full.decode ? full.decode().catch(() => {}) : Promise.resolve();
+    ready.then(() => {
+      if (token !== renderToken) return;   // その間に別の写真へ進んでいたら捨てる
+      modalImg.src = src;
+      modalImg.alt = `${activeScene.ja} ${activePhoto + 1} / ${activeGallery.length}`;
+      modalImg.classList.add("is-visible");
+      lightbox.classList.add("is-ready");  // 矢印は写真と同時に出す
+      preloadNeighbors();
+    });
   }
-  modalImg.addEventListener("load", () => modalImg.classList.add("is-visible"));
 
   function showPhoto(index, direction = "next") {
     activePhoto = index;

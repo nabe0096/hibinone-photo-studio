@@ -803,7 +803,7 @@ button { font-family: inherit; cursor: pointer; }
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
   opacity: 0;
   transform: scale(0.97);
-  transition: opacity 0.4s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease;
+  transition: opacity 0.22s ease, transform 0.36s cubic-bezier(0.18, 1.2, 0.28, 1);
 }
 .scene-modal__img.is-from-prev { transform: translateX(-24px) scale(0.97); }
 .scene-modal__img.is-from-next { transform: translateX(24px) scale(0.97); }
@@ -811,21 +811,12 @@ button { font-family: inherit; cursor: pointer; }
   opacity: 1;
   transform: translateX(0) scale(1);
 }
-/* 本物が届くまでの間：サムネイルをぼかして少し大きく。届いた瞬間にピントが合う */
-.scene-modal__img.is-blurred {
-  filter: blur(18px) brightness(0.9);
-  transform: scale(1.03);
-}
-/* 左右ボタンは写真がピントを結んでから、少し遅れてふわっと出す */
+/* 左右ボタンは写真と同時に出す（写真より先に出さない） */
 .scene-modal__controls {
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.5s ease 0.25s, transform 0.5s ease 0.25s;
+  transition: opacity 0.22s ease;
 }
-.scene-modal__lightbox.is-ready .scene-modal__controls {
-  opacity: 1;
-  transform: none;
-}
+.scene-modal__lightbox.is-ready .scene-modal__controls { opacity: 1; }
 /* 左右ボタン：写真の真下・中央。細い白線の丸だけのシンプルな形 */
 .scene-modal__controls {
   flex: 0 0 auto;
