@@ -284,38 +284,58 @@
   sceneModal.setAttribute("role", "dialog");
   sceneModal.setAttribute("aria-modal", "true");
   sceneModal.setAttribute("aria-hidden", "true");
+  sceneModal.dataset.view = "grid";
   sceneModal.innerHTML = `
-    <button type="button" class="scene-modal__close" aria-label="写真を閉じる">×</button>
-    <figure class="scene-modal__figure">
-      <img class="scene-modal__img" src="" alt="">
+    <div class="scene-modal__panel">
+      <header class="scene-modal__head">
+        <div class="scene-modal__headtext">
+          <span class="scene-modal__title"></span>
+          <span class="scene-modal__count"></span>
+        </div>
+        <p class="scene-modal__desc"></p>
+        <button type="button" class="scene-modal__close" aria-label="閉じる">×</button>
+      </header>
+
+      <div class="scene-modal__grid" aria-label="写真一覧"></div>
       <div class="scene-modal__placeholder" hidden>
         <span class="scene-modal__placeholder-en">Preparing</span>
         <span class="scene-modal__placeholder-ja">写真は準備中です</span>
       </div>
-      <div class="scene-modal__controls" aria-label="写真送り">
-        <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+
+      <figure class="scene-modal__figure">
+        <button type="button" class="scene-modal__back" aria-label="一覧に戻る">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 3.5h7v7h-7zM13.5 3.5h7v7h-7zM3.5 13.5h7v7h-7zM13.5 13.5h7v7h-7z"/></svg>
+          <span>一覧へ戻る</span>
         </button>
-        <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        <button type="button" class="scene-modal__zoom" aria-label="タップで一覧に戻る">
+          <img class="scene-modal__img" src="" alt="">
         </button>
-      </div>
-      <figcaption class="scene-modal__caption">
-        <span class="scene-modal__title"></span>
-        <span class="scene-modal__count"></span>
-      </figcaption>
-      <p class="scene-modal__desc"></p>
-    </figure>
-    `;
+        <div class="scene-modal__controls" aria-label="写真送り">
+          <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+          </button>
+          <span class="scene-modal__pos"></span>
+          <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+        <p class="scene-modal__hint">写真をタップすると一覧に戻ります</p>
+      </figure>
+    </div>
+  `;
   document.body.appendChild(sceneModal);
 
-  const modalImg = $(".scene-modal__img", sceneModal);
+  const modalGrid        = $(".scene-modal__grid", sceneModal);
+  const modalImg         = $(".scene-modal__img", sceneModal);
+  const modalZoom        = $(".scene-modal__zoom", sceneModal);
   const modalPlaceholder = $(".scene-modal__placeholder", sceneModal);
-  const modalTitle = $(".scene-modal__title", sceneModal);
-  const modalCount = $(".scene-modal__count", sceneModal);
-  const modalDesc = $(".scene-modal__desc", sceneModal);
-  const prevBtn = $(".scene-modal__nav--prev", sceneModal);
-  const nextBtn = $(".scene-modal__nav--next", sceneModal);
+  const modalTitle       = $(".scene-modal__title", sceneModal);
+  const modalCount       = $(".scene-modal__count", sceneModal);
+  const modalDesc        = $(".scene-modal__desc", sceneModal);
+  const modalPos         = $(".scene-modal__pos", sceneModal);
+  const prevBtn  = $(".scene-modal__nav--prev", sceneModal);
+  const nextBtn  = $(".scene-modal__nav--next", sceneModal);
+  const backBtn  = $(".scene-modal__back", sceneModal);
   const closeBtn = $(".scene-modal__close", sceneModal);
   let activeGallery = [];
   let activeScene = null;
@@ -325,42 +345,79 @@
     if (Array.isArray(scene.gallery) && scene.gallery.length) return scene.gallery;
     return [];
   }
+  // 一覧用の軽いサムネイル（同じフォルダの thumb/ にある）。無ければ元画像で代用する
+  function thumbOf(src) { return src.replace(/([^/]+)$/, "thumb/$1"); }
 
-  function renderScenePhoto(direction) {
-    if (!activeScene) return;
+  function setView(view) { sceneModal.dataset.view = view; }
+
+  /* 一覧（サムネイルのグリッド）を組み立てる */
+  function renderGrid() {
+    modalGrid.innerHTML = "";
     if (!activeGallery.length) {
-      modalImg.classList.remove("is-visible", "is-from-prev", "is-from-next");
-      modalImg.hidden = true;
-      modalImg.removeAttribute("src");
-      modalImg.alt = "";
+      modalGrid.hidden = true;
       modalPlaceholder.hidden = false;
-      modalTitle.textContent = activeScene.ja;
-      modalCount.textContent = "準備中";
-      modalDesc.textContent = activeScene.desc || "";
-      prevBtn.hidden = true;
-      nextBtn.hidden = true;
       return;
     }
-
-    const src = activeGallery[activePhoto];
-    modalImg.hidden = false;
+    modalGrid.hidden = false;
     modalPlaceholder.hidden = true;
+    const frag = document.createDocumentFragment();
+    activeGallery.forEach((src, i) => {
+      const b = el("button", "scene-modal__thumb");
+      b.type = "button";
+      b.dataset.index = String(i);
+      b.setAttribute("aria-label", `${activeScene.ja} ${i + 1}枚目を拡大`);
+      const img = el("img");
+      // 最初の1画面分（24枚）はすぐ読み込み、それ以降は画面に入る直前に読み込む
+      img.loading = i < 24 ? "eager" : "lazy";
+      img.decoding = "async";
+      img.alt = "";
+      img.src = thumbOf(src);
+      img.onerror = () => { img.onerror = null; img.src = src; };
+      img.addEventListener("load", () => b.classList.add("is-loaded"), { once: true });
+      if (img.complete && img.naturalWidth) b.classList.add("is-loaded");
+      // 正方形の枠は button ではなく内側の span に持たせる（button は aspect-ratio が効かない）
+      const box = el("span", "scene-modal__thumb-box");
+      box.appendChild(img);
+      b.appendChild(box);
+      frag.appendChild(b);
+    });
+    modalGrid.appendChild(frag);
+  }
+
+  /* 拡大表示の1枚を描く */
+  function renderScenePhoto(direction) {
+    if (!activeScene || !activeGallery.length) return;
+    const src = activeGallery[activePhoto];
     modalImg.classList.remove("is-visible", "is-from-prev", "is-from-next");
     modalImg.classList.add(direction === "prev" ? "is-from-prev" : "is-from-next");
     window.setTimeout(() => {
       modalImg.src = src;
       modalImg.alt = `${activeScene.ja} ${activePhoto + 1}`;
-      modalTitle.textContent = activeScene.ja;
-      modalCount.textContent = `${activePhoto + 1} / ${activeGallery.length}`;
-      modalDesc.textContent = activeScene.desc || "";
+      modalPos.textContent = `${activePhoto + 1} / ${activeGallery.length}`;
       prevBtn.hidden = activeGallery.length < 2;
       nextBtn.hidden = activeGallery.length < 2;
-    }, 90);
+    }, 60);
+  }
+  modalImg.addEventListener("load", () => modalImg.classList.add("is-visible"));
+
+  function showPhoto(index, direction = "next") {
+    activePhoto = index;
+    setView("single");
+    renderScenePhoto(direction);
+    backBtn.focus({ preventScroll: true });
   }
 
-  modalImg.addEventListener("load", () => {
-    modalImg.classList.add("is-visible");
-  });
+  /* 拡大 → 一覧へ戻る（見ていた写真の位置までスクロールして目印を付ける） */
+  function backToGrid() {
+    setView("grid");
+    modalGrid.querySelectorAll(".is-current").forEach((n) => n.classList.remove("is-current"));
+    const cur = modalGrid.querySelector(`.scene-modal__thumb[data-index="${activePhoto}"]`);
+    if (cur) {
+      cur.classList.add("is-current");
+      cur.scrollIntoView({ block: "center", behavior: "auto" });
+      cur.focus({ preventScroll: true });
+    }
+  }
 
   function moveScenePhoto(step) {
     if (activeGallery.length < 2) return;
@@ -368,15 +425,19 @@
     renderScenePhoto(step < 0 ? "prev" : "next");
   }
 
-  function openSceneGallery(scene, startIndex = 0) {
-    const gallery = getSceneGallery(scene);
+  function openSceneGallery(scene) {
     activeScene = scene;
-    activeGallery = gallery;
-    activePhoto = gallery.length ? startIndex : 0;
+    activeGallery = getSceneGallery(scene);
+    activePhoto = 0;
+    modalTitle.textContent = scene.ja;
+    modalCount.textContent = activeGallery.length ? `${activeGallery.length}枚` : "準備中";
+    modalDesc.textContent = scene.desc || "";
+    renderGrid();
+    modalGrid.scrollTop = 0;
+    setView("grid");
     sceneModal.setAttribute("aria-hidden", "false");
     sceneModal.classList.add("is-open");
     document.body.classList.add("is-modal-open");
-    renderScenePhoto("next");
     closeBtn.focus({ preventScroll: true });
   }
 
@@ -391,7 +452,12 @@
     if (!btn) return;
     openSceneGallery(C.scenes[Number(btn.dataset.sceneIndex)]);
   });
-
+  modalGrid.addEventListener("click", (e) => {
+    const t = e.target.closest(".scene-modal__thumb");
+    if (t) showPhoto(Number(t.dataset.index));
+  });
+  modalZoom.addEventListener("click", backToGrid);   // 拡大写真をタップ → 一覧へ
+  backBtn.addEventListener("click", backToGrid);
   prevBtn.addEventListener("click", () => moveScenePhoto(-1));
   nextBtn.addEventListener("click", () => moveScenePhoto(1));
   closeBtn.addEventListener("click", closeSceneGallery);
@@ -400,9 +466,10 @@
   });
   document.addEventListener("keydown", (e) => {
     if (!sceneModal.classList.contains("is-open")) return;
-    if (e.key === "Escape") closeSceneGallery();
-    if (e.key === "ArrowLeft") moveScenePhoto(-1);
-    if (e.key === "ArrowRight") moveScenePhoto(1);
+    const single = sceneModal.dataset.view === "single";
+    if (e.key === "Escape") { if (single) backToGrid(); else closeSceneGallery(); }
+    if (single && e.key === "ArrowLeft") moveScenePhoto(-1);
+    if (single && e.key === "ArrowRight") moveScenePhoto(1);
   });
 
   /* ----------------------------------------------------------
