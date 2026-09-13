@@ -776,7 +776,10 @@ button { font-family: inherit; cursor: pointer; }
   inset: 0;
   z-index: 5;
   display: none;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
   padding: 16px;
   background: rgba(10, 10, 10, 0.94);
   cursor: zoom-out;
@@ -784,14 +787,15 @@ button { font-family: inherit; cursor: pointer; }
   transition: opacity 0.22s ease;
 }
 .scene-modal[data-view="single"] .scene-modal__lightbox {
-  display: grid;
+  display: flex;
   opacity: 1;
 }
 /* 拡大中は下の一覧を消す（透けて見えると写真の邪魔になる。位置は保持されるので戻ると同じ場所） */
 .scene-modal[data-view="single"] .scene-modal__panel { visibility: hidden; }
 .scene-modal__img {
   max-width: 100%;
-  max-height: calc(100svh - 32px);
+  /* 下に左右ボタン（約48px＋余白）を置く分だけ高さを空ける */
+  max-height: calc(100svh - 32px - 66px);
   width: auto;
   height: auto;
   object-fit: contain;
@@ -807,24 +811,37 @@ button { font-family: inherit; cursor: pointer; }
   opacity: 1;
   transform: translateX(0) scale(1);
 }
-/* 左右の矢印は画面の端・写真の真ん中の高さに固定 */
-.scene-modal__lightbox .scene-modal__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border-color: rgba(255, 255, 255, 0.38);
-  background: rgba(0, 0, 0, 0.38);
+/* 左右ボタン：写真の真下・中央。細い白線の丸だけのシンプルな形 */
+.scene-modal__controls {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  pointer-events: none;   /* ボタンの間の隙間を押したら背景扱い（一覧へ戻る） */
+}
+.scene-modal__controls .scene-modal__nav {
+  pointer-events: auto;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: transparent;
   color: #fff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
-.scene-modal__lightbox .scene-modal__nav:hover {
-  transform: translateY(-50%) scale(1.06);
-  background: rgba(0, 0, 0, 0.6);
-  border-color: rgba(255, 255, 255, 0.7);
+.scene-modal__controls .scene-modal__nav:hover {
+  transform: none;
+  background: #fff;
+  color: #111;
+  border-color: #fff;
 }
-.scene-modal__lightbox .scene-modal__nav svg { stroke-width: 2; }
-.scene-modal__nav--prev { left: clamp(10px, 2.4vw, 32px); }
-.scene-modal__nav--next { right: clamp(10px, 2.4vw, 32px); }
+.scene-modal__controls .scene-modal__nav svg {
+  width: 40%;
+  height: 40%;
+  stroke-width: 1.5;
+}
 .scene-modal__lightbox-close {
   position: absolute;
   top: clamp(10px, 2vw, 22px);
@@ -927,10 +944,9 @@ button { font-family: inherit; cursor: pointer; }
     padding: 2px 2px 22px;
   }
   /* スマホは写真を画面いっぱいに。矢印は写真に重ねて端に置く */
-  .scene-modal__lightbox { padding: 0; }
-  .scene-modal__img { max-height: 100svh; box-shadow: none; }
-  .scene-modal__nav--prev { left: 6px; }
-  .scene-modal__nav--next { right: 6px; }
+  .scene-modal__lightbox { padding: 0; gap: 14px; }
+  .scene-modal__img { max-height: calc(100svh - 76px); box-shadow: none; }
+  .scene-modal__controls .scene-modal__nav { width: 44px; height: 44px; }
   .scene-modal__lightbox-close { top: 6px; right: 6px; }
   .scene-modal__placeholder-en { font-size: clamp(20px, 8vw, 34px); }
   .scene-modal__placeholder-ja { font-size: 12px; }

@@ -306,12 +306,15 @@
     <!-- 拡大表示：画面全体を暗くして写真だけを大きく。写真以外を押すと一覧へ戻る -->
     <div class="scene-modal__lightbox" aria-label="写真の拡大表示">
       <img class="scene-modal__img" src="" alt="">
-      <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
-      </button>
-      <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-      </button>
+      <!-- 左右ボタンは写真に重ねず、写真の真下・中央に置く -->
+      <div class="scene-modal__controls" aria-label="写真送り">
+        <button type="button" class="scene-modal__nav scene-modal__nav--prev" aria-label="前の写真へ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+        </button>
+        <button type="button" class="scene-modal__nav scene-modal__nav--next" aria-label="次の写真へ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+      </div>
       <button type="button" class="scene-modal__lightbox-close" aria-label="一覧に戻る">×</button>
     </div>
   `;
@@ -457,7 +460,7 @@
   });
   // 拡大表示：写真・矢印以外の場所（暗い背景）を押すと一覧へ戻る
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) backToGrid();
+    if (e.target === lightbox || e.target.classList.contains("scene-modal__controls")) backToGrid();
   });
   lightboxCloseBtn.addEventListener("click", backToGrid);
   prevBtn.addEventListener("click", () => moveScenePhoto(-1));
