@@ -1163,6 +1163,28 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--ink-soft);
 }
 .plan-card__desc p + p { margin-top: 0.6em; }
+/* オプション料金の一覧（撮影料金に追加する金額） */
+.plan-card__prices {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.plan-card__price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13.5px;
+  letter-spacing: 0.06em;
+}
+.plan-card__price-row dt { color: var(--ink-soft); }
+.plan-card__price-row dd {
+  margin: 0;
+  color: var(--black);
+  font-weight: 500;
+  white-space: nowrap;
+}
 @media (max-width: 860px) {
   .price__plans { max-width: 620px; }
   .plan-card {

@@ -512,6 +512,10 @@
         <h4 class="plan-card__ja">${esc(p.ja)}</h4>
         <div class="plan-card__copy">${p.copy.map((t) => `<p>${esc(t)}</p>`).join("")}</div>
         <div class="plan-card__desc">${p.desc.map((t) => `<p>${esc(t)}</p>`).join("")}</div>
+        ${p.prices && p.prices.length ? `
+        <dl class="plan-card__prices">
+          ${p.prices.map((r) => `<div class="plan-card__price-row"><dt>${esc(r.name)}</dt><dd>${esc(r.price)}</dd></div>`).join("")}
+        </dl>` : ""}
       </div>`;
     planWrap.appendChild(card);
     io.observe(card);
